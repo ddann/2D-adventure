@@ -1,3 +1,3 @@
 # 2D-adventure
 
-A 2D game.
+A fighting oriented boss-rush styled  extremely hard 2D-platformer.
