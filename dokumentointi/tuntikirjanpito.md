@@ -4,6 +4,7 @@
 23.1.2015	01:30-04:10	2,5h	Projektin tekemistä ja siihen liittyviä testejä.
 25.1.2015	05:30-05:45	0,25h	Projektin rakennen suunnittelua järkeväksi ja määrittelyvaiheen luokkakaavion päivittämistä.
 28.1.2015	20:35-20:50	0,25h	Uuden luokkakaavion tekemistä suunnittelun luokkien vällisten yhteyksien mukaan. (vanha määrittely on ehkä turha)
+29.1.2015	19:50-21:50	2h	Tehnyt logikan rakennen lähes täysin ja "moottorin" toiminnot pitkälti määritelty.
 
 Ps. tietostossa on käytetty "tabulointia"...ei ainakaan gitissä näytä hyvältä suoraan.
 kannattaa katsoa Rawina, jotta näkyy oikein. (Poistan joskus ensi viikolla tämän ps:n)
