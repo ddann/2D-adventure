@@ -8,5 +8,6 @@
 29.1.2015	22:00-23:00	1h	Logikkaa sekä testejä.
 30.1.2015	2:25-2:40	0,25	Testejä, hitusen logiikkaa.
 
-Ps. tietostossa on käytetty "tabulointia"...ei ainakaan gitissä näytä hyvältä suoraan.
-kannattaa katsoa Rawina, jotta näkyy oikein. (Poistan joskus ensi viikolla tämän ps:n)
+
+Ps. Tietosto ei  gitissä näytä hyvältä suoraan.
+Kannattaa katsoa Rawina, jotta näkyy oikein.

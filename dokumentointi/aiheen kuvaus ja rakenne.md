@@ -9,7 +9,7 @@ Omat, ehkä tavallista realistisimmat fysiikat käyttäen jollain tavalla aitoja
 Grafiikka tulee oleman todella yksinkertaista, varmaan jotain ääniä ja musiikkia tulee olemaan ("jotain OS-musiikkia"), eikä peli tule olemaan kovinkaan pitkä/suuri (tosin ajallisesti läpi pääseminen voi viedä jonkun aikaa...)
 
 
-Tarkoitus on saada ainakin valmiiksi: Pelin oma "game-engine", pelihahmo täysin, ja ainakin pari kenttäää bosseineen. Sekä GUI, musiikki (ei pitäis olla vaikea käyttää niitä pelissä), yms.
+Tarkoitus on saada ainakin valmiiksi: Pelin oma "game-engine", pelihahmo täysin, ja ainakin pari kenttäää bosseineen (tai ainakin yksi hyvin tehty). Sekä GUI, musiikki (ei pitäis olla vaikea käyttää niitä pelissä), yms.
 
 
 
