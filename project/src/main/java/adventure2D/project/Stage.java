@@ -11,8 +11,8 @@ public class  Stage {
 	int playerPositionX = 222;
 	int playerPositionY = 222;
 	
-	int bossPositionX = 333;
-	int bosspositionY = 333;
+	int bossPositionX = 777;
+	int bosspositionY = 777;
 	
 	
 }

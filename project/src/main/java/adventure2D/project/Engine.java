@@ -4,11 +4,11 @@ import java.util.LinkedList;
 
 public class Engine {
 
-	private Stage stage  = new Stage(); //There is only one for now.
-	private Player player = new Player(stage.playerPositionX, stage.playerPositionY);
-	private Boss boss = new Boss(stage.bossPositionX, stage.bosspositionY);
+	protected Stage stage  = new Stage(); //There is only one for now.
+	protected Player player = new Player(stage.playerPositionX, stage.playerPositionY);
+	protected Boss boss = new Boss(stage.bossPositionX, stage.bosspositionY);
 	
-	private LinkedList<Character> characterList = new LinkedList<Character>();
+	protected LinkedList<Character> characterList = new LinkedList<Character>();
 	
 	private int g = 10; //It is actually the acceleration down (there is no  air resistance)
 	
@@ -17,7 +17,8 @@ public class Engine {
 	//TODO: Some way of storing inputs.
 	
 	
-	private boolean hasLost = false;
+	protected boolean hasLost = false;
+	protected boolean hasWin = false;
 	
 	
 	/*
@@ -28,7 +29,7 @@ public class Engine {
 		characterList.add(player);
 		characterList.add(boss);
 		
-		while (!hasLost) {
+		while (!hasLost && !hasWin) {
 			//TODO:Reads inputs. (another class)
 			this.doOneLoop();
 			//Should this class use GUI instead of the contrary? TODO: Plan the project's structure for what comes to the GUI.
@@ -49,7 +50,7 @@ public class Engine {
 	 * Detects if there has been a collision, in such a case if it is player and boss, then the "player is killed".
 	 * For now it is a simple circle implementation.
 	 */
-	private void detectCollision() {
+	protected void detectCollision() {
 		if (Math.abs(player.x-boss.x) < player.radius + boss.radius || Math.abs(player.y-boss.y) < player.radius + boss.radius ) {
 			this.hasLost = true;
 		}
@@ -60,7 +61,7 @@ public class Engine {
 	 * May have repeated code, but (at least for now) if changes are to be done it could be easier to this structure.
 	 * (Now it only get the character back to the stage)
 	 */
-	private void overStageTest() {
+	protected void overStageTest() {
 		//(maybe)TODO: In case of the player going over stage it could be a loose.
 		//The boss should't go over the stage, but in case it happens... (would it be actually a bug?)
 		for (Character c: characterList) {
@@ -75,7 +76,7 @@ public class Engine {
 	 * Moves the character based in physics laws. (and some "hard-coded" calculations.)
 	 * For now it assumes that stages max y is the floor.
 	 */
-	private void moveByPhisics() {
+	protected void moveByPhisics() {
 		//TODO:Something based on the inputs and boss AI.
 		
 		for (Character c: characterList) {
@@ -91,6 +92,24 @@ public class Engine {
 			//TODO: Change acceleration based on forces. (I think is better to update acceleration first)
 			c.x+= c.speedx * timeStep; c.y+= c.speedy * timeStep;
 			c.speedx+= c.accelerationx * timeStep; c.speedy+= c.accelerationy * timeStep;
+			
+			//Characters doesn't bounce. (They loose all kinetic energy at a "collision" with the stage's edge.
+			if (c.y >= stage.height-1) {
+				if (c.accelerationy > 0) c.accelerationy =0;
+				if (c.speedy > 0) c.accelerationy =0;
+			}
+			if (c.y <= 0) {
+				if (c.accelerationy < 0) c.accelerationy =0;
+				if (c.speedy < 0) c.accelerationy =0;
+			}
+			if (c.x >= stage.width-1) {
+				if (c.accelerationx > 0) c.accelerationx =0;
+				if (c.speedx > 0) c.accelerationx =0;
+			}
+			if (c.x <= 0) {
+				if (c.accelerationx < 0) c.accelerationx =0;
+				if (c.speedy < 0) c.accelerationx =0;
+			}
 		}
 	}
 	
