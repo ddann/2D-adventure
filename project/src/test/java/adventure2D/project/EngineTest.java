@@ -177,16 +177,20 @@ public class EngineTest {
 	public void detectCollision1() {
 		engine.boss.x = 200;
 		engine.player.x = 200;
+		engine.boss.y = 0;
+		engine.player.y = 1000;
 		engine.detectCollision();
-		assertEquals(engine.hasLost, true);
+		assertEquals(engine.hasLost, false);
 	}
 	
 	@Test
 	public void detectCollision2() {
 		engine.boss.y = 200;
 		engine.player.y = 200;
+		engine.boss.x = 0;
+		engine.player.x = 1000;
 		engine.detectCollision();
-		assertEquals(engine.hasLost, true);
+		assertEquals(engine.hasLost, false);
 	}
 	
 	@Test
@@ -221,6 +225,40 @@ public class EngineTest {
 		assertEquals(engine.hasLost, false);
 	}
 	
+	@Test
+	public void detectCollision7() {
+		engine.boss.y = 200;
+		engine.player.y = 200 + engine.boss.radius;
+		engine.boss.x = 0;
+		engine.player.x = 0 +engine.player.radius-1;
+		engine.detectCollision();
+		assertEquals(engine.hasLost, true);
+	}
+	
+	@Test
+	public void detectCollision8() {
+		engine.boss.radius=2;
+		engine.player.radius=2;
+		engine.boss.y = 0;
+		engine.player.y = 4;
+		engine.boss.x = 0;
+		engine.player.x = 4;
+		engine.detectCollision();
+		assertEquals(engine.hasLost, false);
+	}
+	
+	@Test
+	public void detectCollision9() {
+		engine.boss.radius=2;
+		engine.player.radius=2;
+		engine.boss.y = 0;
+		engine.player.y = 1;
+		engine.boss.x = 0;
+		engine.player.x = 2;
+		engine.detectCollision();
+		assertEquals(engine.hasLost, true);
+	}
+	
 	
 	@Test
 	public void moveByPhisics_Jump0() {
@@ -241,6 +279,51 @@ public class EngineTest {
 	//	double expected = engine.g * engine.timeStep;
 	//	assertEquals(engine.player.accelerationy, expected);
 	//}
+	
+	
+	@Test
+	public void doOneLoopTest_Collision() {
+		engine.characterList.add(engine.player);
+		engine.characterList.add(engine.boss);
+		engine.boss.y = 200;
+		engine.player.y = 200;
+		engine.boss.x = 200;
+		engine.player.x = 200;
+		engine.doOneLoop();
+		assertEquals(engine.hasLost, true);
+	}
+	
+	@Test
+	public void doOneLoopTest_MoveByPhisics() {
+		engine.characterList.add(engine.player);
+		engine.characterList.add(engine.boss);
+		engine.player.y = engine.stage.height-1;
+		engine.player.hasJumped = true;
+		engine.doOneLoop();
+		assertEquals(engine.player.hasJumped, false);
+	}
+	
+	@Test
+	public void doOneLoopTest_OverStageTest() {
+		engine.characterList.add(engine.player);
+		engine.characterList.add(engine.boss);
+		engine.player.y = -1;
+		engine.doOneLoop();
+		assertEquals(engine.player.y, 0);
+	}
+	
+	
+	@Test
+	public void FullGameLoopTest_OneLoopCall() {
+		engine.characterList.add(engine.player);
+		engine.characterList.add(engine.boss);
+		engine.boss.y = 200;
+		engine.player.y = 200;
+		engine.boss.x = 200;
+		engine.player.x = 200;
+		engine.fullGameLoop();
+		assertEquals(engine.hasLost, true);
+	}
 	
 
 }

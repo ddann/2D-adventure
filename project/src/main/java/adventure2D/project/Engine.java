@@ -44,12 +44,11 @@ public class Engine {
 		//TODO:Something.
 	}
 	
-	private void doOneLoop() {
+	protected void doOneLoop() {
 		//TODO:Change things based on inputs and boss' "AI".
 		this.moveByPhisics();
-		this.detectCollision();
 		this.overStageTest();
-
+		this.detectCollision();
 	}
 	
 	/*
@@ -57,7 +56,7 @@ public class Engine {
 	 * For now it is a simple circle implementation.
 	 */
 	protected void detectCollision() {
-		if (Math.abs(player.x-boss.x) < player.radius + boss.radius || Math.abs(player.y-boss.y) < player.radius + boss.radius ) {
+		if (Math.sqrt((player.x - boss.x)*(player.x - boss.x) + (player.y - boss.y)*(player.y - boss.y)) < player.radius + boss.radius) {
 			this.hasLost = true;
 		}
 	}
