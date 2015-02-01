@@ -34,6 +34,13 @@ public class EngineTest {
 		assertEquals(engine.stage.bosspositionY, engine.boss.y);
 	}
 	
+	@Test
+	public void bossHealthIsRight() {
+		assertEquals(engine.stage.bossHealth, engine.boss.Health);
+	}
+	
+	
+	
 	//This test may not be definitive
 	@Test
 	public void characterListHasthecharacters() {
@@ -213,5 +220,27 @@ public class EngineTest {
 		engine.detectCollision();
 		assertEquals(engine.hasLost, false);
 	}
+	
+	
+	@Test
+	public void moveByPhisics_Jump0() {
+		engine.hasLost =true;
+		engine.fullGameLoop();
+		engine.player.hasJumped =true;
+		engine.player.y = engine.stage.height-1;
+		engine.moveByPhisics();
+		assertEquals(engine.player.hasJumped, false);
+	}
+	//Pitää löytää jostain miten testata tietyllä tarkkuudella.
+	//@Test
+	//public void moveByPhisics1() {
+	//	engine.hasLost =true;
+	//	engine.fullGameLoop();
+	//	engine.player.y = 555;
+	//	engine.moveByPhisics();
+	//	double expected = engine.g * engine.timeStep;
+	//	assertEquals(engine.player.accelerationy, expected);
+	//}
+	
 
 }

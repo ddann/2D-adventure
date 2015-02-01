@@ -6,13 +6,13 @@ public class Engine {
 
 	protected Stage stage  = new Stage(); //There is only one for now.
 	protected Player player = new Player(stage.playerPositionX, stage.playerPositionY);
-	protected Boss boss = new Boss(stage.bossPositionX, stage.bosspositionY);
+	protected Boss boss = new Boss(stage.bossPositionX, stage.bosspositionY, stage.bossHealth);
 	
 	protected LinkedList<Character> characterList = new LinkedList<Character>();
 	
-	private int g = 10; //It is actually the acceleration down (there is no  air resistance)
+	protected int g = 10; //It is actually the acceleration down (there is no  air resistance)
 	
-	private double timeStep = 1/60;
+	protected double timeStep = 1/60;
 	
 	//TODO: Some way of storing inputs.
 	
@@ -30,10 +30,16 @@ public class Engine {
 		characterList.add(boss);
 		
 		while (!hasLost && !hasWin) {
+			long timeAtStartingLoop = System.nanoTime();
 			//TODO:Reads inputs. (another class)
 			this.doOneLoop();
 			//Should this class use GUI instead of the contrary? TODO: Plan the project's structure for what comes to the GUI.
-			//TODO:Some way of waiting so that every loop is 1/60 s.
+			try {
+				Thread.sleep(1/60 * 1000 - (System.nanoTime() - timeAtStartingLoop) / 1000000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		//TODO:Something.
 	}
@@ -74,7 +80,7 @@ public class Engine {
 	
 	/*
 	 * Moves the character based in physics laws. (and some "hard-coded" calculations.)
-	 * For now it assumes that stages max y is the floor.
+	 * For now it assumes that stages max y is the floor and other max/min values walls.
 	 */
 	protected void moveByPhisics() {
 		//TODO:Something based on the inputs and boss AI.
@@ -93,7 +99,7 @@ public class Engine {
 			c.x+= c.speedx * timeStep; c.y+= c.speedy * timeStep;
 			c.speedx+= c.accelerationx * timeStep; c.speedy+= c.accelerationy * timeStep;
 			
-			//Characters doesn't bounce. (They loose all kinetic energy at a "collision" with the stage's edge.
+			//Characters doesn't bounce. (They loose all kinetic energy at a "collision" with the stage's edge.)
 			if (c.y >= stage.height-1) {
 				if (c.accelerationy > 0) c.accelerationy =0;
 				if (c.speedy > 0) c.accelerationy =0;

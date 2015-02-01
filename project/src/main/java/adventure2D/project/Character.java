@@ -4,8 +4,11 @@ public class Character {
 
 	int x, y, radius;
 	
-	double speedx, speedy; //Actually a v-vector.
-	double accelerationx, accelerationy; //Actually a a-vector.
+	double speedx = 0;
+	double speedy = 0;
+	
+	double accelerationx = 0;
+	double accelerationy = 0;
 	
 	public Character(int x, int y, int radius) {
 		this.x = x;

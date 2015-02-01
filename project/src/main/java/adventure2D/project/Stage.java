@@ -4,6 +4,7 @@ public class  Stage {
 
 	//Note this is NOT a class from witch to do instances, however for advancing in the project this is a "hard-coded version".
 	//AND first is better to just try to have one stage and one boss.
+	//Numbers are for now random.
 	
 	int width = 1200;
 	int height = 800;
@@ -13,6 +14,7 @@ public class  Stage {
 	
 	int bossPositionX = 777;
 	int bosspositionY = 777;
+	int bossHealth = 1000;
 	
 	
 }
