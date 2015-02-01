@@ -2,6 +2,7 @@ package adventure2D.project;
 
 import org.junit.Before;
 import org.junit.Test;
+
 import static org.junit.Assert.*;
 
 public class EngineTest {
@@ -325,5 +326,18 @@ public class EngineTest {
 		assertEquals(engine.hasLost, true);
 	}
 	
+	@Test
+	public void FullGameLoopTest_Waiting() {
+		engine.characterList.add(engine.player);
+		engine.characterList.add(engine.boss);
+		engine.boss.y = 200;
+		engine.player.y = 200;
+		engine.boss.x = 200;
+		engine.player.x = 200;
+
+		long timeAtStartingCall = System.nanoTime();
+		engine.fullGameLoop();
+		assertEquals(System.nanoTime() - timeAtStartingCall > 16666666, true);
+	}
 
 }

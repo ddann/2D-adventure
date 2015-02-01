@@ -34,12 +34,11 @@ public class Engine {
 			//TODO:Reads inputs. (another class)
 			this.doOneLoop();
 			//Should this class use GUI instead of the contrary? TODO: Plan the project's structure for what comes to the GUI.
-			try {
-				Thread.sleep(1/60 * 1000 - (System.nanoTime() - timeAtStartingLoop) / 1000000);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			
+			while( System.nanoTime()-timeAtStartingLoop <= 16666666 );
+			//Best way to wait the extra-time (eg. Thread.sleep() Inaccurate), works with any display's refresh-rate.
+			//But keeps one thread completely busy, bad if using battery or if single-core(they are only old notebooks however);
+			//There were other ways, but only for C++.
 		}
 		//TODO:Something.
 	}
