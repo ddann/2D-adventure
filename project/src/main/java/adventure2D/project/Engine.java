@@ -100,19 +100,19 @@ public class Engine {
 			//Characters doesn't bounce. (They loose all kinetic energy at a "collision" with the stage's edge.)
 			if (c.y >= stage.height-1) {
 				if (c.accelerationy > 0) c.accelerationy =0;
-				if (c.speedy > 0) c.accelerationy =0;
+				if (c.speedy > 0) c.speedy =0;
 			}
 			if (c.y <= 0) {
 				if (c.accelerationy < 0) c.accelerationy =0;
-				if (c.speedy < 0) c.accelerationy =0;
+				if (c.speedy < 0) c.speedy =0;
 			}
 			if (c.x >= stage.width-1) {
 				if (c.accelerationx > 0) c.accelerationx =0;
-				if (c.speedx > 0) c.accelerationx =0;
+				if (c.speedx > 0) c.speedx =0;
 			}
 			if (c.x <= 0) {
 				if (c.accelerationx < 0) c.accelerationx =0;
-				if (c.speedy < 0) c.accelerationx =0;
+				if (c.speedx < 0) c.speedx =0;
 			}
 		}
 	}

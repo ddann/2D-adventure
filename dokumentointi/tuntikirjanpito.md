@@ -7,10 +7,11 @@
 29.1.2015	19:50-21:50	2h	Tehnyt logikan rakennen lähes täysin ja "moottorin" toiminnot pitkälti määritelty.
 29.1.2015	22:00-23:00	1h	Logikkaa sekä testejä.
 30.1.2015	02:25-02:40	0,25h	Testejä, hitusen logiikkaa.
-2.2.2015	01:15-02:15	1h	Hitusen logiikkaa, korjauksia ja testejä.
-2.2.2015	13:30-14:15	0,75h	Korjauksia ja testejä.
-2.2.2015	15:00-16:00	1h	Gameloopin odottamisen tekeminen (pikälti asiaan liittyvän lukeminen). Testejä.
+1.2.2015	01:15-02:15	1h	Hitusen logiikkaa, korjauksia ja testejä.
+1.2.2015	13:30-14:15	0,75h	Korjauksia ja testejä.
+1.2.2015	15:00-16:00	1h	Gameloopin odottamisen tekeminen (pikälti asiaan liittyvän lukeminen). Testejä.
+1.2.2015	19:30-20:00	0,5h	Testejä.
 
 
-Ps. Tietosto ei  gitissä näytä hyvältä suoraan.
+Ps. Tietosto ei gitissä näytä hyvältä suoraan.
 Kannattaa katsoa Rawina, jotta näkyy oikein.

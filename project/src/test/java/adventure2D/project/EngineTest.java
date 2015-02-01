@@ -270,17 +270,105 @@ public class EngineTest {
 		engine.moveByPhisics();
 		assertEquals(engine.player.hasJumped, false);
 	}
-	//Pitää löytää jostain miten testata tietyllä tarkkuudella.
-	//@Test
-	//public void moveByPhisics1() {
-	//	engine.hasLost =true;
-	//	engine.fullGameLoop();
-	//	engine.player.y = 555;
-	//	engine.moveByPhisics();
-	//	double expected = engine.g * engine.timeStep;
-	//	assertEquals(engine.player.accelerationy, expected);
-	//}
+
+	@Test
+	public void moveByPhisics1() {
+		engine.hasLost =true;
+		engine.fullGameLoop();
+		engine.player.y = 555;
+		engine.moveByPhisics();
+		double expected = engine.g * engine.timeStep;
+		assertEquals(engine.player.accelerationy, expected, 0.00001);
+	}
 	
+	@Test
+	public void moveByPhisics2() {
+		engine.hasLost =true;
+		engine.fullGameLoop();
+		engine.player.y = engine.stage.height-1;
+		engine.moveByPhisics();
+		assertEquals(engine.player.accelerationy, 0, 0.00001);
+	}
+	
+	@Test
+	public void moveByPhisics_Wall1() {
+		engine.hasLost =true;
+		engine.fullGameLoop();
+		engine.player.y = engine.stage.height-1;
+		engine.player.accelerationy =1;
+		engine.moveByPhisics();
+		assertEquals(engine.player.accelerationy, 0, 0.00001);
+	}
+	
+	@Test
+	public void moveByPhisics_Wall2() {
+		engine.hasLost =true;
+		engine.fullGameLoop();
+		engine.player.y = 0;
+		engine.player.accelerationy =-1;
+		engine.moveByPhisics();
+		assertEquals(engine.player.accelerationy, 0, 0.00001);
+	}
+	
+	@Test
+	public void moveByPhisics_Wall3() {
+		engine.hasLost =true;
+		engine.fullGameLoop();
+		engine.player.x = engine.stage.width-1;
+		engine.player.accelerationx =1;
+		engine.moveByPhisics();
+		assertEquals(engine.player.accelerationx, 0, 0.00001);
+	}
+	
+	@Test
+	public void moveByPhisics_Wall4() {
+		engine.hasLost =true;
+		engine.fullGameLoop();
+		engine.player.x = 0;
+		engine.player.accelerationx =-1;
+		engine.moveByPhisics();
+		assertEquals(engine.player.accelerationx, 0, 0.00001);
+	}
+	
+	@Test
+	public void moveByPhisics_Wall5() {
+		engine.hasLost =true;
+		engine.fullGameLoop();
+		engine.player.y = engine.stage.height-1;
+		engine.player.speedy =1;
+		engine.moveByPhisics();
+		assertEquals(engine.player.speedy, 0, 0.00001);
+	}
+	
+	@Test
+	public void moveByPhisics_Wall6() {
+		engine.hasLost =true;
+		engine.fullGameLoop();
+		engine.player.y = 0;
+		engine.player.speedy =-1;
+		engine.moveByPhisics();
+		assertEquals(engine.player.speedy, 0, 0.00001);
+	}
+	
+	@Test
+	public void moveByPhisics_Wall7() {
+		engine.hasLost =true;
+		engine.fullGameLoop();
+		engine.player.x = engine.stage.width-1;
+		engine.player.speedx =1;
+		engine.moveByPhisics();
+		assertEquals(engine.player.speedx, 0, 0.00001);
+	}
+	
+	@Test
+	public void moveByPhisics_Wall8() {
+		engine.hasLost =true;
+		engine.fullGameLoop();
+		engine.player.x = 0;
+		engine.player.speedx =-1;
+		engine.moveByPhisics();
+		assertEquals(engine.player.speedx, 0, 0.00001);
+	}
 	
 	@Test
 	public void doOneLoopTest_Collision() {
