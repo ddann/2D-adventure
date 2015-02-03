@@ -43,17 +43,17 @@ public class Engine {
 				PrintWriter writer = new PrintWriter(save);
 				writer.println("1");
 				writer.close();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 		}
 		
 		Scanner scanner = null;
 		try {
-            scanner= new Scanner(save);
-        } catch (Exception e) {
-        	//TODO something
+			scanner= new Scanner(save);
+		} catch (Exception e) {
+			//TODO something
         }
 		
 		String level = scanner.nextLine();
@@ -62,7 +62,7 @@ public class Engine {
 			this.stage = new Stage();
 		}
 		else {
-			//TODO tell the game has been completed.
+			//TODO tell the game has been completed. If want to play again from the beginning...to delete/move away the save?
 			//There is only one stage but if there would be more this would be the way to load the stage where one is.
 		}
 		scanner.close();
