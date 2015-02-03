@@ -11,6 +11,7 @@
 1.2.2015	13:30-14:15	0,75h	Korjauksia ja testejä.
 1.2.2015	15:00-16:00	1h	Gameloopin odottamisen tekeminen (pikälti asiaan liittyvän lukeminen). Testejä.
 1.2.2015	19:30-20:00	0,5h	Testejä.
+4.2.2015	00:30-01:30	1h	Tiedoston käsittely oikeastaan oppimisen takia (save-tiedosto, mutta kun kenttiä on vain yksi). Testejä ei ole tehdylle koodille enkä viitsisi tehdä tiedostonkäsittelylle.
 
 
 Ps. Tietosto ei gitissä näytä hyvältä suoraan.

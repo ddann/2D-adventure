@@ -1,9 +1,16 @@
 package adventure2D.project;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.LinkedList;
+import java.util.Scanner;
 
 public class Engine {
 
+	private File save = new File("save.save"); //Just a normal text file in the program's root folder, it' s the game's save (nothing sencefull to save for now).
+	
 	protected Stage stage  = new Stage(); //There is only one for now.
 	protected Player player = new Player(stage.playerPositionX, stage.playerPositionY);
 	protected Boss boss = new Boss(stage.bossPositionX, stage.bosspositionY, stage.bossHealth);
@@ -29,6 +36,38 @@ public class Engine {
 		characterList.add(player);
 		characterList.add(boss);
 		
+
+		if (!save.exists()) {
+			try {
+				save.createNewFile();
+				PrintWriter writer = new PrintWriter(save);
+				writer.println("1");
+				writer.close();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
+		Scanner scanner = null;
+		try {
+            scanner= new Scanner(save);
+        } catch (Exception e) {
+        	//TODO something
+        }
+		
+		String level = scanner.nextLine();
+		
+		if (level == "1") {
+			this.stage = new Stage();
+		}
+		else {
+			//TODO tell the game has been completed.
+			//There is only one stage but if there would be more this would be the way to load the stage where one is.
+		}
+		scanner.close();
+        
+		
 		while (!hasLost && !hasWin) {
 			long timeAtStartingLoop = System.nanoTime();
 			//TODO:Reads inputs. (another class)
@@ -40,7 +79,19 @@ public class Engine {
 			//But keeps one thread completely busy, bad if using battery or if single-core(they are only old notebooks however);
 			//There were other ways, but only for C++.
 		}
-		//TODO:Something.
+		//TODO:Something
+		
+		//Only saves for now if won (there is only one stage...)
+		if (this.hasWin) {
+			try {
+				PrintWriter writer = new PrintWriter(save);
+				writer.println("won");
+				writer.close();
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 	}
 	
 	protected void doOneLoop() {

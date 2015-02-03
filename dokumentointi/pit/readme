@@ -1,1 +1,6 @@
 Näyttää erilaiselta kuin ohjeissa, mutta tämä on vastaava rakenne mitä minulla tuli pitistä. 
+
+Ja mutantit joita ei ole tapettu ovat suurin osa käytännössä mahdottomia.
+Esimerkiksi: miten testaan tarkasti odotuksen? Ja ei doublea voi tarkasti ilman että oikea koodi myösjossain tilanteissa antaa fail:in, yms.
+
+Ja en oikein viitsisi testata tiedostonkäsittelyn.
