@@ -1,5 +1,12 @@
 package adventure2D.project;
 
+/**
+ * A class representing a character in the game's world.
+ * 
+ * @param x the character's starting x-coordinate
+ * @param y the character's starting y-coordinate
+ * @param radius the character's radius
+ */
 public class Character {
 
 	int x, y, radius;

@@ -7,13 +7,17 @@ import java.io.PrintWriter;
 import java.util.LinkedList;
 import java.util.Scanner;
 
+/**
+ * The game's engine class that is responsible of making the game run.
+ * It has the game loop and calculates the games physics and makes all the game's calculations.
+ */
 public class Engine {
 
 	private File save = new File("save.save"); //Just a normal text file in the program's root folder, it' s the game's save (nothing sencefull to save for now).
 	
 	protected Stage stage  = new Stage(); //There is only one for now.
 	protected Player player = new Player(stage.playerPositionX, stage.playerPositionY);
-	protected Boss boss = new Boss(stage.bossPositionX, stage.bosspositionY, stage.bossHealth);
+	protected Boss boss = new Boss(stage.bossPositionX, stage.bosspositionY, stage.bossradius, stage.bossHealth);
 	
 	protected LinkedList<Character> characterList = new LinkedList<Character>();
 	
@@ -28,9 +32,9 @@ public class Engine {
 	protected boolean hasWin = false;
 	
 	
-	/*
-	 * The main method that calls the "sub-methods" to move the character.
-	 * The player is always moved before the boss.
+	/**
+	 * The class' "main method" that is the method that calls all the methods that makes the game run and partially makes itself game's calculations.
+	 * First is initialize the rest of the game and start the game loop, then at ending the game it may "save".
 	 */
 	public void fullGameLoop() {
 		characterList.add(player);

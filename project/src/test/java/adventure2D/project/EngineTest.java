@@ -5,6 +5,9 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
+/**
+ * A test class for testing the project's 'engine'-class.
+ */
 public class EngineTest {
 
 	Engine engine;
