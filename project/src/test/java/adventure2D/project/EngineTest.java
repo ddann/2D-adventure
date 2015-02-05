@@ -293,6 +293,7 @@ public class EngineTest {
 		assertEquals(engine.player.accelerationy, 0, 0.00001);
 	}
 	
+	//The tests below actually tests the wallCollisionCheck-method. (and it's calling)
 	@Test
 	public void moveByPhisics_Wall1() {
 		engine.hasLost =true;

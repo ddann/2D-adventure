@@ -15,9 +15,9 @@ public class Engine {
 
 	private File save = new File("save.save"); //Just a normal text file in the program's root folder, it' s the game's save (nothing sencefull to save for now).
 	
-	protected Stage stage  = new Stage(); //There is only one for now.
-	protected Player player = new Player(stage.playerPositionX, stage.playerPositionY);
-	protected Boss boss = new Boss(stage.bossPositionX, stage.bosspositionY, stage.bossradius, stage.bossHealth);
+	protected Stage stage; //There is only one for now.
+	protected Player player;
+	protected Boss boss;
 	
 	protected LinkedList<Character> characterList = new LinkedList<Character>();
 	
@@ -31,16 +31,11 @@ public class Engine {
 	protected boolean hasLost = false;
 	protected boolean hasWin = false;
 	
+	public Engine() {
+		this.loadSave();
+	}
 	
-	/**
-	 * The class' "main method" that is the method that calls all the methods that makes the game run and partially makes itself game's calculations.
-	 * First is initialize the rest of the game and start the game loop, then at ending the game it may "save".
-	 */
-	public void fullGameLoop() {
-		characterList.add(player);
-		characterList.add(boss);
-		
-
+	protected void loadSave() {
 		if (!save.exists()) {
 			try {
 				save.createNewFile();
@@ -61,16 +56,37 @@ public class Engine {
         }
 		
 		String level = scanner.nextLine();
-		
-		if (level == "1") {
+		if (level == level) {
 			this.stage = new Stage();
+			player = new Player(stage.playerPositionX, stage.playerPositionY);
+			boss = new Boss(stage.bossPositionX, stage.bosspositionY, stage.bossradius, stage.bossHealth);
+			characterList.add(player);
+			characterList.add(boss);
 		}
 		else {
 			//TODO tell the game has been completed. If want to play again from the beginning...to delete/move away the save?
+			//TODO And close the program...or something
 			//There is only one stage but if there would be more this would be the way to load the stage where one is.
 		}
 		scanner.close();
-        
+	}
+	
+	protected void saveSave() {
+		try {
+			PrintWriter writer = new PrintWriter(save);
+			writer.println("won");
+			writer.close();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	/**
+	 * The class' "main method" that is the method that calls all the methods that makes the game run and partially makes itself game's calculations.
+	 * First is initialize the rest of the game and start the game loop, then at ending the game it may "save".
+	 */
+	public void fullGameLoop() {
 		
 		while (!hasLost && !hasWin) {
 			long timeAtStartingLoop = System.nanoTime();
@@ -86,16 +102,7 @@ public class Engine {
 		//TODO:Something
 		
 		//Only saves for now if won (there is only one stage...)
-		if (this.hasWin) {
-			try {
-				PrintWriter writer = new PrintWriter(save);
-				writer.println("won");
-				writer.close();
-			} catch (FileNotFoundException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
+		if (this.hasWin) this.saveSave();
 	}
 	
 	protected void doOneLoop() {
@@ -151,7 +158,12 @@ public class Engine {
 			//TODO: Change acceleration based on forces. (I think is better to update acceleration first)
 			c.x+= c.speedx * timeStep; c.y+= c.speedy * timeStep;
 			c.speedx+= c.accelerationx * timeStep; c.speedy+= c.accelerationy * timeStep;
-			
+		}
+		this.wallCollisionCheck();
+	}
+	
+	protected void wallCollisionCheck() {
+		for (Character c: characterList) {
 			//Characters doesn't bounce. (They loose all kinetic energy at a "collision" with the stage's edge.)
 			if (c.y >= stage.height-1) {
 				if (c.accelerationy > 0) c.accelerationy =0;
