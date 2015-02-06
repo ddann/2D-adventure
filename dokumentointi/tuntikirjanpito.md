@@ -13,7 +13,8 @@
 1.2.2015	19:30-20:00	0,5h	Testejä.
 4.2.2015	00:30-01:30	1h	Tiedoston käsittely oikeastaan oppimisen takia (save-tiedosto, mutta kun kenttiä on vain yksi). Testejä ei ole tehdylle koodille enkä viitsisi tehdä tiedostonkäsittelylle.
 4.2.2015	21:15-21:30	0,25h	Javadoc ja pienia parannuksia koodiin.
-6.2.2015	1:25-1:55	0,5h	Koodin refraktorointia ja korjauksia.
+6.2.2015	01:25-01:55	0,5h	Koodin refraktorointia ja korjauksia.
+6.2.2015	22:00-23:00	1h	Inputien lukeminen käyttäjältä + vähän muuta.
 
 
 Ps. Tietosto ei gitissä näytä hyvältä suoraan.

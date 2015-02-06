@@ -12,6 +12,9 @@ public class Player extends Character{
 	 * Whether there is a jump to be done.
 	 */
 	boolean hasJumped = false;
+	boolean toLeft = false;
+	boolean toRight = false;
+	boolean shoot = false;
 	
 	public Player(int x, int y) {
 		super(x, y, 100);

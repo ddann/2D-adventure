@@ -431,5 +431,10 @@ public class EngineTest {
 		engine.fullGameLoop();
 		assertEquals(System.nanoTime() - timeAtStartingCall > 16666666, true);
 	}
+	
+	@Test
+	public void createsInputManager() {
+		assertTrue(engine.inputManager != null);
+	}
 
 }

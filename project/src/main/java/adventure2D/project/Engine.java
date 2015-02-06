@@ -12,6 +12,8 @@ import java.util.Scanner;
  * It has the game loop and calculates the games physics and makes all the game's calculations.
  */
 public class Engine {
+	
+	protected InputManager inputManager;
 
 	private File save = new File("save.save"); //Just a normal text file in the program's root folder, it' s the game's save (nothing sencefull to save for now).
 	
@@ -33,6 +35,7 @@ public class Engine {
 	
 	public Engine() {
 		this.loadSave();
+		inputManager = new InputManager(player);
 	}
 	
 	protected void loadSave() {
@@ -56,7 +59,7 @@ public class Engine {
         }
 		
 		String level = scanner.nextLine();
-		if (level == level) {
+		if (level == level) { //For now it always starts the same stage.
 			this.stage = new Stage();
 			player = new Player(stage.playerPositionX, stage.playerPositionY);
 			boss = new Boss(stage.bossPositionX, stage.bosspositionY, stage.bossradius, stage.bossHealth);
