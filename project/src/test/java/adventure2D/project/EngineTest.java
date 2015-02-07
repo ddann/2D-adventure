@@ -48,8 +48,6 @@ public class EngineTest {
 	//This test may not be definitive
 	@Test
 	public void characterListHasthecharacters() {
-		engine.hasLost = true;
-		engine.fullGameLoop();
 		assertEquals(engine.characterList.size(), 2);
 		assertEquals(engine.characterList.contains(engine.boss) && engine.characterList.contains(engine.player), true);
 	}
@@ -266,18 +264,60 @@ public class EngineTest {
 	
 	@Test
 	public void moveByPhisics_Jump0() {
-		engine.hasLost =true;
-		engine.fullGameLoop();
 		engine.player.hasJumped =true;
 		engine.player.y = engine.stage.height-1;
 		engine.moveByPhisics();
 		assertEquals(engine.player.hasJumped, false);
 	}
+	
+	@Test
+	public void moveByPhisics_Jump1() {
+		engine.player.hasJumped =true;
+		engine.player.y = engine.stage.height-1;
+		engine.moveByPhisics();
+		assertEquals(engine.player.accelerationx, 50 * engine.timeStep, 0.00001);
+	}
+	
+	@Test
+	public void moveByPhisics_playerDirection_both() {
+		engine.player.toLeft = true;
+		engine.player.toRight = true;
+		engine.moveByPhisics();
+		assertEquals(engine.player.accelerationx, 0, 0.00001);
+	}
+	
+	@Test
+	public void moveByPhisics_playerDirection_Left() {
+		engine.player.toLeft = true;
+		engine.moveByPhisics();
+		assertEquals(engine.player.accelerationx, - 7 * engine.timeStep, 0.00001);
+	}
+	
+	@Test
+	public void moveByPhisics_playerDirection_Right() {
+		engine.player.toRight = true;
+		engine.moveByPhisics();
+		assertEquals(engine.player.accelerationx, 7 * engine.timeStep, 0.00001);
+	}
+	
+	@Test
+	public void moveByPhisics_playerDirection_Left2() {
+		engine.player.toLeft = true;
+		engine.player.accelerationx =-10;
+		engine.moveByPhisics();
+		assertEquals(engine.player.accelerationx, -10, 0.00001);
+	}
+	
+	@Test
+	public void moveByPhisics_playerDirection_Right2() {
+		engine.player.toRight = true;
+		engine.player.accelerationx =10;
+		engine.moveByPhisics();
+		assertEquals(engine.player.accelerationx, 10, 0.00001);
+	}
 
 	@Test
 	public void moveByPhisics1() {
-		engine.hasLost =true;
-		engine.fullGameLoop();
 		engine.player.y = 555;
 		engine.moveByPhisics();
 		double expected = engine.g * engine.timeStep;
@@ -286,8 +326,6 @@ public class EngineTest {
 	
 	@Test
 	public void moveByPhisics2() {
-		engine.hasLost =true;
-		engine.fullGameLoop();
 		engine.player.y = engine.stage.height-1;
 		engine.moveByPhisics();
 		assertEquals(engine.player.accelerationy, 0, 0.00001);
@@ -296,8 +334,6 @@ public class EngineTest {
 	//The tests below actually tests the wallCollisionCheck-method. (and it's calling)
 	@Test
 	public void moveByPhisics_Wall1() {
-		engine.hasLost =true;
-		engine.fullGameLoop();
 		engine.player.y = engine.stage.height-1;
 		engine.player.accelerationy =1;
 		engine.moveByPhisics();
@@ -306,8 +342,6 @@ public class EngineTest {
 	
 	@Test
 	public void moveByPhisics_Wall2() {
-		engine.hasLost =true;
-		engine.fullGameLoop();
 		engine.player.y = 0;
 		engine.player.accelerationy =-1;
 		engine.moveByPhisics();
@@ -316,8 +350,6 @@ public class EngineTest {
 	
 	@Test
 	public void moveByPhisics_Wall3() {
-		engine.hasLost =true;
-		engine.fullGameLoop();
 		engine.player.x = engine.stage.width-1;
 		engine.player.accelerationx =1;
 		engine.moveByPhisics();
@@ -326,8 +358,6 @@ public class EngineTest {
 	
 	@Test
 	public void moveByPhisics_Wall4() {
-		engine.hasLost =true;
-		engine.fullGameLoop();
 		engine.player.x = 0;
 		engine.player.accelerationx =-1;
 		engine.moveByPhisics();
@@ -336,8 +366,6 @@ public class EngineTest {
 	
 	@Test
 	public void moveByPhisics_Wall5() {
-		engine.hasLost =true;
-		engine.fullGameLoop();
 		engine.player.y = engine.stage.height-1;
 		engine.player.speedy =1;
 		engine.moveByPhisics();
@@ -346,8 +374,6 @@ public class EngineTest {
 	
 	@Test
 	public void moveByPhisics_Wall6() {
-		engine.hasLost =true;
-		engine.fullGameLoop();
 		engine.player.y = 0;
 		engine.player.speedy =-1;
 		engine.moveByPhisics();
@@ -356,8 +382,6 @@ public class EngineTest {
 	
 	@Test
 	public void moveByPhisics_Wall7() {
-		engine.hasLost =true;
-		engine.fullGameLoop();
 		engine.player.x = engine.stage.width-1;
 		engine.player.speedx =1;
 		engine.moveByPhisics();
@@ -366,8 +390,6 @@ public class EngineTest {
 	
 	@Test
 	public void moveByPhisics_Wall8() {
-		engine.hasLost =true;
-		engine.fullGameLoop();
 		engine.player.x = 0;
 		engine.player.speedx =-1;
 		engine.moveByPhisics();
@@ -376,8 +398,6 @@ public class EngineTest {
 	
 	@Test
 	public void doOneLoopTest_Collision() {
-		engine.characterList.add(engine.player);
-		engine.characterList.add(engine.boss);
 		engine.boss.y = 200;
 		engine.player.y = 200;
 		engine.boss.x = 200;
@@ -388,8 +408,6 @@ public class EngineTest {
 	
 	@Test
 	public void doOneLoopTest_MoveByPhisics() {
-		engine.characterList.add(engine.player);
-		engine.characterList.add(engine.boss);
 		engine.player.y = engine.stage.height-1;
 		engine.player.hasJumped = true;
 		engine.doOneLoop();
@@ -398,8 +416,6 @@ public class EngineTest {
 	
 	@Test
 	public void doOneLoopTest_OverStageTest() {
-		engine.characterList.add(engine.player);
-		engine.characterList.add(engine.boss);
 		engine.player.y = -1;
 		engine.doOneLoop();
 		assertEquals(engine.player.y, 0);
@@ -408,8 +424,6 @@ public class EngineTest {
 	
 	@Test
 	public void FullGameLoopTest_OneLoopCall() {
-		engine.characterList.add(engine.player);
-		engine.characterList.add(engine.boss);
 		engine.boss.y = 200;
 		engine.player.y = 200;
 		engine.boss.x = 200;
@@ -420,8 +434,6 @@ public class EngineTest {
 	
 	@Test
 	public void FullGameLoopTest_Waiting() {
-		engine.characterList.add(engine.player);
-		engine.characterList.add(engine.boss);
 		engine.boss.y = 200;
 		engine.player.y = 200;
 		engine.boss.x = 200;

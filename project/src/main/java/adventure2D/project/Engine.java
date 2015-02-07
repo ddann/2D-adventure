@@ -152,15 +152,27 @@ public class Engine {
 		for (Character c: characterList) {
 			if (c==player) {
 				if (c.y != stage.height-1) {
-					c.accelerationy += g * timeStep; 
+					c.accelerationy += g * timeStep; //Just drops faster and faster... TODO Maybe falling speed should be limited. 
 				}
 				else if (player.hasJumped) { //Only the player can jump.
-					//TODO: Define the force (actually for ease directly the acceleration) of the jump and the calculations.
+					//The jump's force is calculated directly as acceleration, inaccurate physics... 
+					player.accelerationy -= 50 * timeStep;
 					player.hasJumped = false;
 				}
-				//TODO Do something if player is going to move left/right, if both (possible with keyboard) do nothing.
+				//Changes the x-axis acceleration, the more there is already to the same direction the less it changes.
+				//Change calculated based on already had acceleration.
+				if (player.toLeft && player.toRight) {} //Do something if player is going to move left/right, if both (possible with keyboard) do nothing.
+				else if (player.toLeft) {
+					if (player.accelerationx >-7) player.accelerationx =  player.accelerationx - (7 + player.accelerationx)*timeStep;
+				}
+				else if (player.toRight) {
+					if (player.accelerationx <7) player.accelerationx =  player.accelerationx + (7 - player.accelerationx)*timeStep;
+				}
+				//TODO if player is not pressing left or right maybe the character should stop moving left or right.
 			}
-			//TODO: Change acceleration based on forces. (I think is better to update acceleration first)
+			
+			
+			//All the above changes the acceleration based on forces. (I think is better to update acceleration first)
 			c.x+= c.speedx * timeStep; c.y+= c.speedy * timeStep;
 			c.speedx+= c.accelerationx * timeStep; c.speedy+= c.accelerationy * timeStep;
 		}

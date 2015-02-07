@@ -16,6 +16,7 @@
 6.2.2015	01:25-01:55	0,5h	Koodin refraktorointia ja korjauksia.
 6.2.2015	22:00-23:00	1h	Inputien lukeminen käyttäjältä + vähän muuta.
 7.2.2015	02:10-02:40	0,5h	Yritys onnistua testaamaan InputManager loukka, pitkän selvittelyn jäkeen päädyin siihen tulokseen, että ei ole järkeä testata sitä kun pelaamalla peliä ja katsomalla toimiiko. + Muuta
+7.2.2015	17:15-18:00	0,75h	Logiikan tekemistä ja sille testejä. Sekä aivan turhan koodin poistaminen testeistä, joissa sitä oli.
 
 
 Ps. Tietosto ei gitissä näytä hyvältä suoraan.
