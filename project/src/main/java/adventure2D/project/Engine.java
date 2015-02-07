@@ -110,6 +110,7 @@ public class Engine {
 	
 	protected void doOneLoop() {
 		//TODO:Change things based on inputs and boss' "AI".
+		//TODO Attacks before moving?
 		this.moveByPhisics();
 		this.overStageTest();
 		this.detectCollision();
@@ -157,6 +158,7 @@ public class Engine {
 					//TODO: Define the force (actually for ease directly the acceleration) of the jump and the calculations.
 					player.hasJumped = false;
 				}
+				//TODO Do something if player is going to move left/right, if both (possible with keyboard) do nothing.
 			}
 			//TODO: Change acceleration based on forces. (I think is better to update acceleration first)
 			c.x+= c.speedx * timeStep; c.y+= c.speedy * timeStep;

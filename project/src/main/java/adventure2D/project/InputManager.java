@@ -9,7 +9,7 @@ import java.awt.event.KeyListener;
  */
 public class InputManager implements KeyListener{
 	
-	private Player player;
+	protected Player player;
 
 	public InputManager(Player player) {
 		this.player = player;
