@@ -49,8 +49,14 @@ public class EngineTest {
 	@Test
 	public void characterListHasthecharacters() {
 		assertEquals(engine.characterList.size(), 2);
-		assertEquals(engine.characterList.contains(engine.boss) && engine.characterList.contains(engine.player), true);
+		assertTrue(engine.characterList.contains(engine.boss) && engine.characterList.contains(engine.player));
 	}
+	
+	@Test
+	public void guiIsCreated() {
+		assertTrue(engine.gui != null);
+	}
+	
 	
 	@Test
 	public void loosingEndsLoopDirectly() {

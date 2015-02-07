@@ -7,6 +7,8 @@ import java.io.PrintWriter;
 import java.util.LinkedList;
 import java.util.Scanner;
 
+import adventure2D.gui.GUI;
+
 /**
  * The game's engine class that is responsible of making the game run.
  * It has the game loop and calculates the games physics and makes all the game's calculations.
@@ -14,6 +16,7 @@ import java.util.Scanner;
 public class Engine {
 	
 	protected InputManager inputManager;
+	protected GUI gui;
 
 	private File save = new File("save.save"); //Just a normal text file in the program's root folder, it' s the game's save (nothing sencefull to save for now).
 	
@@ -22,6 +25,8 @@ public class Engine {
 	protected Boss boss;
 	
 	protected LinkedList<Character> characterList = new LinkedList<Character>();
+	
+	protected LinkedList<GameObject> objectList = new LinkedList<GameObject>();
 	
 	protected int g = 10; //It is actually the acceleration down (there is no  air resistance...)
 	
@@ -36,6 +41,7 @@ public class Engine {
 	public Engine() {
 		this.loadSave();
 		inputManager = new InputManager(player);
+		gui = new GUI(characterList, objectList, stage);
 	}
 	
 	protected void loadSave() {
