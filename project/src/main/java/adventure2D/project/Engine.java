@@ -23,11 +23,11 @@ public class Engine {
 	
 	protected LinkedList<Character> characterList = new LinkedList<Character>();
 	
-	protected int g = 10; //It is actually the acceleration down (there is no  air resistance)
+	protected int g = 10; //It is actually the acceleration down (there is no  air resistance...)
 	
 	protected double timeStep = 1/60;
 	
-	//TODO: Some way of storing inputs.
+	//TODO: Some way of storing inputs. (for now isn't needed)
 	
 	
 	protected boolean hasLost = false;
@@ -93,7 +93,6 @@ public class Engine {
 		
 		while (!hasLost && !hasWin) {
 			long timeAtStartingLoop = System.nanoTime();
-			//TODO:Reads inputs. (another class)
 			this.doOneLoop();
 			//Should this class use GUI instead of the contrary? TODO: Plan the project's structure for what comes to the GUI.
 			
@@ -157,18 +156,22 @@ public class Engine {
 				else if (player.hasJumped) { //Only the player can jump.
 					//The jump's force is calculated directly as acceleration, inaccurate physics... 
 					player.accelerationy -= 50 * timeStep;
-					player.hasJumped = false;
 				}
+				player.hasJumped = false;
+				
 				//Changes the x-axis acceleration, the more there is already to the same direction the less it changes.
 				//Change calculated based on already had acceleration.
-				if (player.toLeft && player.toRight) {} //Do something if player is going to move left/right, if both (possible with keyboard) do nothing.
-				else if (player.toLeft) {
+				//Do something if player is going to move left/right, if both (possible with keyboard) do like it would be no press.
+				if (player.toLeft && !player.toRight) {
 					if (player.accelerationx >-7) player.accelerationx =  player.accelerationx - (7 + player.accelerationx)*timeStep;
 				}
-				else if (player.toRight) {
+				else if (player.toRight && !player.toLeft) {
 					if (player.accelerationx <7) player.accelerationx =  player.accelerationx + (7 - player.accelerationx)*timeStep;
 				}
-				//TODO if player is not pressing left or right maybe the character should stop moving left or right.
+				else {
+					player.accelerationx *=  0.8;//If player is not pressing left or right, character stops moving left or right. In that case drop x-speed.
+					//TODO if the speed is low enough stop character (and acceleration)
+				}
 			}
 			
 			

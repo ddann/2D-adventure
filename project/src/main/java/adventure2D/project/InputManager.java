@@ -35,17 +35,11 @@ public class InputManager implements KeyListener{
 	@Override
 	public void keyReleased(KeyEvent e) {
 		int key = e.getKeyCode();
-		if (key == KeyEvent.VK_S) {
-			player.hasJumped = false;
-		}
 		if (key== KeyEvent.VK_RIGHT)  {
 			player.toRight = false;
 		}
 		if (key== KeyEvent.VK_LEFT)  {
 			player.toLeft = false;
-		}
-		if (key == KeyEvent.VK_A) {
-			player.shoot = false;
 		}
 	}
 

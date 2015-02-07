@@ -315,6 +315,13 @@ public class EngineTest {
 		engine.moveByPhisics();
 		assertEquals(engine.player.accelerationx, 10, 0.00001);
 	}
+	
+	@Test
+	public void moveByPhisics_playerDirection_None() {
+		engine.player.accelerationx =10;
+		engine.moveByPhisics();
+		assertEquals(engine.player.accelerationx, 10*0.8, 0.00001);
+	}
 
 	@Test
 	public void moveByPhisics1() {
