@@ -6,6 +6,7 @@ package adventure2D.project;
  * 
  * @param x the boss' starting x-coordinate
  * @param y the boss' starting y-coordinate
+ * @param r the boss' radius
  * @param h the boss' health
  */
 public class Boss extends Character{

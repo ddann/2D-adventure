@@ -2,6 +2,7 @@ package adventure2D.project;
 
 /**
  * A class representing a character in the game's world.
+ * All characters starts with acceleration and speed as zero.
  * 
  * @param x the character's starting x-coordinate
  * @param y the character's starting y-coordinate

@@ -6,6 +6,8 @@ import java.awt.event.KeyListener;
 /**
  * This class is in charge of handling the player's inputs and managing some changes based on the inputs.
  * (Changes are done directly on this class, because of being able to make the code simpler and this is the most clear way.)
+ * 
+ * @param player The playable character of the game.
  */
 public class InputManager implements KeyListener{
 	

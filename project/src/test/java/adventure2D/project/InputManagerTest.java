@@ -29,12 +29,12 @@ public class InputManagerTest {
 	//How it supposed one to be able to test input's reading automatically?, I guess better to do it with running the game.
 	//@Test
 	//public void KeyPressedTest_jump() {
-	//	inputManager.keyPressed(???));
+	//	inputManager.keyPressed(???);
 	//}
 
 	//@Test
 	//public void KeyReleased_jump() {
-	//	inputManager.keyPressed(???));
+	//	inputManager.keyPressed(???);
 	//}
 
 }

@@ -12,6 +12,7 @@ import adventure2D.gui.GUI;
 /**
  * The game's engine class that is responsible of making the game run.
  * It has the game loop and calculates the games physics and makes all the game's calculations.
+ * It is also in charge of crating the GUI-class and InputManager-class needed for running the game.
  */
 public class Engine {
 	
@@ -46,6 +47,9 @@ public class Engine {
 	
 	
 	
+	/**
+	 * This method loads the save by 'loading' the save's info to the corresponding variables (or to ram if to be said).
+	 */
 	protected void loadSave() {
 		if (!save.exists()) {
 			try {
@@ -78,10 +82,15 @@ public class Engine {
 			//TODO tell the game has been completed. If want to play again from the beginning...to delete/move away the save?
 			//TODO And close the program...or something
 			//There is only one stage but if there would be more this would be the way to load the stage where one is.
+			//For this project most likely it will always start the first stage (I won't change it, and as for "expandibility" I'll let this like it is now)
 		}
 		scanner.close();
 	}
 	
+	/**
+	 * A method in charge of saving to as save-file.
+	 * For now it is only called if the game is won, and writes just "won" to the save.
+	 */
 	protected void saveSave() {
 		try {
 			PrintWriter writer = new PrintWriter(save);
@@ -96,8 +105,8 @@ public class Engine {
 	
 	
 	/**
-	 * The class' "main method" that is the method that calls all the methods that makes the game run and partially makes itself game's calculations.
-	 * First is initialize the rest of the game and start the game loop, then at ending the game it may "save".
+	 * The class' "main method" that is the method that calls all the methods that makes the game run, call the GUI to draw and wait the needed time for steady FPS.
+	 * It starts the game loop, then at ending the game it may "save".
 	 */
 	public void fullGameLoop() {
 		
@@ -118,6 +127,10 @@ public class Engine {
 	}
 	
 	
+	/**
+	 * This method is just a method for making the code more readable as all 'things' hasn't to be calculated in just one method.
+	 * In other word it just make calls to other methods that are in charge of the game's running.
+	 */
 	protected void doOneLoop() {
 		//TODO:Change things based on inputs and boss' "AI".
 		//TODO Attacks before moving?
@@ -160,8 +173,7 @@ public class Engine {
 	}
 	
 	/**
-	 * Moves the character based in physics laws. (and some "hard-coded" calculations.)
-	 * For now it assumes that stages max y is the floor and other max/min values walls.
+	 * Moves all the characters based in physics laws. (some "hard-coded" calculations.)
 	 */
 	protected void moveByPhisics() {
 		//TODO:Something based on the boss AI.
@@ -173,6 +185,11 @@ public class Engine {
 		}
 	}
 	
+	/**
+	 * Checks whether there has been a collision with a stages 'wall', actually the edge.
+	 * For now it assumes that stages max y is the floor and other max/min values walls.
+	 * In case of collision it resets to zero both the character's speed and acceleration.
+	 */
 	protected void wallCollisionCheck() {
 		for (Character c: characterList) {
 			//Characters doesn't bounce. (They loose all kinetic energy at a "collision" with the stage's edge.)
@@ -198,7 +215,7 @@ public class Engine {
 	/**
 	 * Test whether the character has gone over the stage and does something to it.
 	 * May have repeated code, but (at least for now) if changes are to be done it could be easier to this structure.
-	 * (Now it only get the character back to the stage)
+	 * (For now it only get the character back to the stage)
 	 */
 	protected void overStageTest() {
 		//(maybe)TODO: In case of the player going over stage it could be a loose.
