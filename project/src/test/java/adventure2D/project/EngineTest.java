@@ -77,7 +77,7 @@ public class EngineTest {
 	//Naming could be improved... and maybe there is too many. (The last one's are "extra")
 	@Test
 	public void overStageTest1() {
-		Character c = new Character(0,0, 100);
+		Character c = new Player(0,0);
 		engine.characterList.add(c);
 		c.x-= 20;
 		engine.overStageTest();
@@ -85,7 +85,7 @@ public class EngineTest {
 	}
 	@Test
 	public void overStageTest2() {
-		Character c = new Character(0,0, 100);
+		Character c = new Player(0,0);
 		engine.characterList.add(c);
 		c.x+= 100000;
 		engine.overStageTest();
@@ -93,7 +93,7 @@ public class EngineTest {
 	}
 	@Test
 	public void overStageTest3() {
-		Character c = new Character(0,0, 100);
+		Character c = new Player(0,0);
 		engine.characterList.add(c);
 		c.y-= 33;
 		engine.overStageTest();
@@ -101,7 +101,7 @@ public class EngineTest {
 	}
 	@Test
 	public void overStageTest4() {
-		Character c = new Character(0,0, 100);
+		Character c = new Player(0,0);
 		engine.characterList.add(c);
 		c.y+= 100000;
 		engine.overStageTest();
@@ -109,7 +109,7 @@ public class EngineTest {
 	}
 	@Test
 	public void overStageTest5() {
-		Character c = new Character(0,0, 100);
+		Character c = new Player(0,0);
 		engine.characterList.add(c);
 		c.x+= 10;
 		c.y+= 20;
@@ -119,7 +119,7 @@ public class EngineTest {
 	}
 	@Test
 	public void overStageTest6() {
-		Character c = new Character(0,0, 100);
+		Character c = new Player(0,0);
 		engine.characterList.add(c);
 		c.y+= engine.stage.height;
 		engine.overStageTest();
@@ -127,7 +127,7 @@ public class EngineTest {
 	}
 	@Test
 	public void overStageTest7() {
-		Character c = new Character(0,0, 100);
+		Character c = new Player(0,0);
 		engine.characterList.add(c);
 		c.x+= engine.stage.width;
 		engine.overStageTest();
@@ -135,7 +135,7 @@ public class EngineTest {
 	}
 	@Test
 	public void overStageTest8() {
-		Character c = new Character(0,0, 100);
+		Character c = new Player(0,0);
 		engine.characterList.add(c);
 		engine.overStageTest();
 		assertEquals(c.x, 0);
@@ -143,7 +143,7 @@ public class EngineTest {
 	}
 	@Test
 	public void overStageTest9() {
-		Character c = new Character(0,0, 100);
+		Character c = new Player(0,0);
 		engine.characterList.add(c);
 		c.x-= 1;
 		c.y-= 1;
@@ -153,7 +153,7 @@ public class EngineTest {
 	}
 	@Test
 	public void overStageTest10() {
-		Character c = new Character(0,0, 100);
+		Character c = new Player(0,0);
 		engine.characterList.add(c);
 		c.x+= 1;
 		c.y+= 1;
@@ -163,7 +163,7 @@ public class EngineTest {
 	}
 	@Test
 	public void overStageTest11() {
-		Character c = new Character(0,0, 100);
+		Character c = new Player(0,0);
 		engine.characterList.add(c);
 		c.x+= engine.stage.width-200;
 		c.y+= engine.stage.height-200;
@@ -269,63 +269,63 @@ public class EngineTest {
 	
 	
 	@Test
-	public void moveByPhisics_Jump0() {
+	public void movePlayer_Jump0() {
 		engine.player.hasJumped =true;
 		engine.player.y = engine.stage.height-1;
-		engine.moveByPhisics();
+		engine.movePlayer();
 		assertEquals(engine.player.hasJumped, false);
 	}
 	
 	@Test
-	public void moveByPhisics_Jump1() {
+	public void movePlayer_Jump1() {
 		engine.player.hasJumped =true;
 		engine.player.y = engine.stage.height-1;
-		engine.moveByPhisics();
+		engine.movePlayer();
 		assertEquals(engine.player.accelerationx, 50 * engine.timeStep, 0.00001);
 	}
 	
 	@Test
-	public void moveByPhisics_playerDirection_both() {
+	public void movePlayer_playerDirection_both() {
 		engine.player.toLeft = true;
 		engine.player.toRight = true;
-		engine.moveByPhisics();
+		engine.movePlayer();
 		assertEquals(engine.player.accelerationx, 0, 0.00001);
 	}
 	
 	@Test
-	public void moveByPhisics_playerDirection_Left() {
+	public void movePlayer_playerDirection_Left() {
 		engine.player.toLeft = true;
-		engine.moveByPhisics();
+		engine.movePlayer();
 		assertEquals(engine.player.accelerationx, - 7 * engine.timeStep, 0.00001);
 	}
 	
 	@Test
-	public void moveByPhisics_playerDirection_Right() {
+	public void movePlayer_playerDirection_Right() {
 		engine.player.toRight = true;
-		engine.moveByPhisics();
+		engine.movePlayer();
 		assertEquals(engine.player.accelerationx, 7 * engine.timeStep, 0.00001);
 	}
 	
 	@Test
-	public void moveByPhisics_playerDirection_Left2() {
+	public void movePlayer_playerDirection_Left2() {
 		engine.player.toLeft = true;
 		engine.player.accelerationx =-10;
-		engine.moveByPhisics();
+		engine.movePlayer();
 		assertEquals(engine.player.accelerationx, -10, 0.00001);
 	}
 	
 	@Test
-	public void moveByPhisics_playerDirection_Right2() {
+	public void movePlayer_playerDirection_Right2() {
 		engine.player.toRight = true;
 		engine.player.accelerationx =10;
-		engine.moveByPhisics();
+		engine.movePlayer();
 		assertEquals(engine.player.accelerationx, 10, 0.00001);
 	}
 	
 	@Test
-	public void moveByPhisics_playerDirection_None() {
+	public void movePlayer_playerDirection_None() {
 		engine.player.accelerationx =10;
-		engine.moveByPhisics();
+		engine.movePlayer();
 		assertEquals(engine.player.accelerationx, 10*0.8, 0.00001);
 	}
 
@@ -346,66 +346,66 @@ public class EngineTest {
 	
 	//The tests below actually tests the wallCollisionCheck-method. (and it's calling)
 	@Test
-	public void moveByPhisics_Wall1() {
+	public void wallCollisionTest_1() {
 		engine.player.y = engine.stage.height-1;
 		engine.player.accelerationy =1;
-		engine.moveByPhisics();
+		engine.wallCollisionCheck();
 		assertEquals(engine.player.accelerationy, 0, 0.00001);
 	}
 	
 	@Test
-	public void moveByPhisics_Wall2() {
+	public void wallCollisionTest_2() {
 		engine.player.y = 0;
 		engine.player.accelerationy =-1;
-		engine.moveByPhisics();
+		engine.wallCollisionCheck();
 		assertEquals(engine.player.accelerationy, 0, 0.00001);
 	}
 	
 	@Test
-	public void moveByPhisics_Wall3() {
+	public void wallCollisionTest_3() {
 		engine.player.x = engine.stage.width-1;
 		engine.player.accelerationx =1;
-		engine.moveByPhisics();
+		engine.wallCollisionCheck();
 		assertEquals(engine.player.accelerationx, 0, 0.00001);
 	}
 	
 	@Test
-	public void moveByPhisics_Wall4() {
+	public void wallCollisionTest_4() {
 		engine.player.x = 0;
 		engine.player.accelerationx =-1;
-		engine.moveByPhisics();
+		engine.wallCollisionCheck();
 		assertEquals(engine.player.accelerationx, 0, 0.00001);
 	}
 	
 	@Test
-	public void moveByPhisics_Wall5() {
+	public void wallCollisionTest_5() {
 		engine.player.y = engine.stage.height-1;
 		engine.player.speedy =1;
-		engine.moveByPhisics();
+		engine.wallCollisionCheck();
 		assertEquals(engine.player.speedy, 0, 0.00001);
 	}
 	
 	@Test
-	public void moveByPhisics_Wall6() {
+	public void mwallCollisionTest_6() {
 		engine.player.y = 0;
 		engine.player.speedy =-1;
-		engine.moveByPhisics();
+		engine.wallCollisionCheck();
 		assertEquals(engine.player.speedy, 0, 0.00001);
 	}
 	
 	@Test
-	public void moveByPhisics_Wall7() {
+	public void wallCollisionTest_7() {
 		engine.player.x = engine.stage.width-1;
 		engine.player.speedx =1;
-		engine.moveByPhisics();
+		engine.wallCollisionCheck();
 		assertEquals(engine.player.speedx, 0, 0.00001);
 	}
 	
 	@Test
-	public void moveByPhisics_Wall8() {
+	public void wallCollisionTest_8() {
 		engine.player.x = 0;
 		engine.player.speedx =-1;
-		engine.moveByPhisics();
+		engine.wallCollisionCheck();
 		assertEquals(engine.player.speedx, 0, 0.00001);
 	}
 	

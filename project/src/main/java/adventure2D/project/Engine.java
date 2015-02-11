@@ -34,15 +34,17 @@ public class Engine {
 	
 	//TODO: Some way of storing inputs. (for now isn't needed)
 	
-	
 	protected boolean hasLost = false;
 	protected boolean hasWin = false;
+	
 	
 	public Engine() {
 		this.loadSave();
 		inputManager = new InputManager(player);
 		gui = new GUI(characterList, objectList, stage);
 	}
+	
+	
 	
 	protected void loadSave() {
 		if (!save.exists()) {
@@ -91,6 +93,8 @@ public class Engine {
 		}
 	}
 
+	
+	
 	/**
 	 * The class' "main method" that is the method that calls all the methods that makes the game run and partially makes itself game's calculations.
 	 * First is initialize the rest of the game and start the game loop, then at ending the game it may "save".
@@ -113,79 +117,60 @@ public class Engine {
 		if (this.hasWin) this.saveSave();
 	}
 	
+	
 	protected void doOneLoop() {
 		//TODO:Change things based on inputs and boss' "AI".
 		//TODO Attacks before moving?
+		this.movePlayer();
 		this.moveByPhisics();
+		this.wallCollisionCheck();
 		this.overStageTest();
 		this.detectCollision();
 	}
 	
-	/*
-	 * Detects if there has been a collision, in such a case if it is player and boss, then the "player is killed".
-	 * For now it is a simple circle implementation.
+	
+	
+	/**
+	 * A protected method that makes moves/"does things based in players inputs" that are only possible to do by the playable character.
 	 */
-	protected void detectCollision() {
-		if (Math.sqrt((player.x - boss.x)*(player.x - boss.x) + (player.y - boss.y)*(player.y - boss.y)) < player.radius + boss.radius) {
-			this.hasLost = true;
+	protected void movePlayer() {
+		if (player.y != stage.height-1) {
+			player.accelerationy += g * timeStep; //Just drops faster and faster... TODO Maybe falling speed should be limited. 
 		}
+		else if (player.hasJumped) {
+			//The jump's force is calculated directly as acceleration, inaccurate physics... 
+			player.accelerationy -= 50 * timeStep;
+		}
+		player.hasJumped = false;
+		
+		//Changes the x-axis acceleration, the more there is already to the same direction the less it changes.
+		//Change calculated based on already had acceleration.
+		//Do something if player is going to move left/right, if both (possible with keyboard) do like it would be no press.
+		if (player.toLeft && !player.toRight) {
+			if (player.accelerationx >-7) player.accelerationx =  player.accelerationx - (7 + player.accelerationx)*timeStep;
+		}
+		else if (player.toRight && !player.toLeft) {
+			if (player.accelerationx <7) player.accelerationx =  player.accelerationx + (7 - player.accelerationx)*timeStep;
+		}
+		else {
+			player.accelerationx *=  0.8;//If player is not pressing left or right, character stops moving left or right. In that case drop x-speed.
+			//TODO if the speed is low enough stop character (and acceleration)
+		}
+		
 	}
 	
-	/*
-	 * Test whether the character has gone over the stage and does something to it.
-	 * May have repeated code, but (at least for now) if changes are to be done it could be easier to this structure.
-	 * (Now it only get the character back to the stage)
-	 */
-	protected void overStageTest() {
-		//(maybe)TODO: In case of the player going over stage it could be a loose.
-		//The boss should't go over the stage, but in case it happens... (would it be actually a bug?)
-		for (Character c: characterList) {
-			if (c.x >= stage.width) c.x = stage.width-1;
-			else if (c.x < 0) c.x = 0;
-			if (c.y >= stage.height) c.y = stage.height-1;
-			else if (c.y < 0) c.y = 0;
-		}
-	}
-	
-	/*
+	/**
 	 * Moves the character based in physics laws. (and some "hard-coded" calculations.)
 	 * For now it assumes that stages max y is the floor and other max/min values walls.
 	 */
 	protected void moveByPhisics() {
-		//TODO:Something based on the inputs and boss AI.
+		//TODO:Something based on the boss AI.
 		
-		for (Character c: characterList) {
-			if (c==player) {
-				if (c.y != stage.height-1) {
-					c.accelerationy += g * timeStep; //Just drops faster and faster... TODO Maybe falling speed should be limited. 
-				}
-				else if (player.hasJumped) { //Only the player can jump.
-					//The jump's force is calculated directly as acceleration, inaccurate physics... 
-					player.accelerationy -= 50 * timeStep;
-				}
-				player.hasJumped = false;
-				
-				//Changes the x-axis acceleration, the more there is already to the same direction the less it changes.
-				//Change calculated based on already had acceleration.
-				//Do something if player is going to move left/right, if both (possible with keyboard) do like it would be no press.
-				if (player.toLeft && !player.toRight) {
-					if (player.accelerationx >-7) player.accelerationx =  player.accelerationx - (7 + player.accelerationx)*timeStep;
-				}
-				else if (player.toRight && !player.toLeft) {
-					if (player.accelerationx <7) player.accelerationx =  player.accelerationx + (7 - player.accelerationx)*timeStep;
-				}
-				else {
-					player.accelerationx *=  0.8;//If player is not pressing left or right, character stops moving left or right. In that case drop x-speed.
-					//TODO if the speed is low enough stop character (and acceleration)
-				}
-			}
-			
-			
+		for (Character c: characterList) {		
 			//All the above changes the acceleration based on forces. (I think is better to update acceleration first)
 			c.x+= c.speedx * timeStep; c.y+= c.speedy * timeStep;
 			c.speedx+= c.accelerationx * timeStep; c.speedy+= c.accelerationy * timeStep;
 		}
-		this.wallCollisionCheck();
 	}
 	
 	protected void wallCollisionCheck() {
@@ -207,6 +192,32 @@ public class Engine {
 				if (c.accelerationx < 0) c.accelerationx =0;
 				if (c.speedx < 0) c.speedx =0;
 			}
+		}
+	}
+	
+	/**
+	 * Test whether the character has gone over the stage and does something to it.
+	 * May have repeated code, but (at least for now) if changes are to be done it could be easier to this structure.
+	 * (Now it only get the character back to the stage)
+	 */
+	protected void overStageTest() {
+		//(maybe)TODO: In case of the player going over stage it could be a loose.
+		//The boss should't go over the stage, but in case it happens... (would it be actually a bug?)
+		for (Character c: characterList) {
+			if (c.x >= stage.width) c.x = stage.width-1;
+			else if (c.x < 0) c.x = 0;
+			if (c.y >= stage.height) c.y = stage.height-1;
+			else if (c.y < 0) c.y = 0;
+		}
+	}
+	
+	/**
+	 * Detects if there has been a collision, in such a case if it is player and boss, then the "player is killed".
+	 * For now it is a simple circle implementation.
+	 */
+	protected void detectCollision() {
+		if (Math.sqrt((player.x - boss.x)*(player.x - boss.x) + (player.y - boss.y)*(player.y - boss.y)) < player.radius + boss.radius) {
+			this.hasLost = true;
 		}
 	}
 	

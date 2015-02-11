@@ -7,7 +7,7 @@ package adventure2D.project;
  * @param y the character's starting y-coordinate
  * @param radius the character's radius
  */
-public class Character {
+public abstract class Character {
 
 	int x, y, radius;
 	

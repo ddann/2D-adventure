@@ -5,7 +5,8 @@ import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
 /**
- * Unit test for simple App.
+ * This is an auto-generated test class, that appeared "by itself" when crating the project. It says: "Unit test for simple App."
+ * There are things to test, but for now I don't have any clue how they could be tested.
  */
 public class AppTest 
     extends TestCase

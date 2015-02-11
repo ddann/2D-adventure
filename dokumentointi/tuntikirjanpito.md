@@ -19,6 +19,7 @@
 7.2.2015	17:15-18:00	0,75h	Logiikan tekemistä ja sille testejä. Sekä aivan turhan koodin poistaminen testeistä, joissa sitä oli.
 7.2.2015	20:45-21:00	0,25h	Hitusen logikkaa ja refraktorointia sekä testi.
 7.2.2015	21:15-21:30	0,25h	Guita + vähän muuta.
+11.2.2015	02:20-02:50	0,5h	Pitkälti pelkästään refraktorointia.
 
 
 Ps. Tietosto ei gitissä näytä hyvältä suoraan.

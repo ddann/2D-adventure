@@ -14,6 +14,8 @@ public class Boss extends Character{
 	 * The boss' health. Attacking decreases it and if <= 0, it is assumed to be defeated.
 	 */
 	int Health;
+	
+	//TODO Something that would store what the boss is going to do.
 
 	public Boss(int x, int y, int r, int h) {
 		super(x, y, r);
