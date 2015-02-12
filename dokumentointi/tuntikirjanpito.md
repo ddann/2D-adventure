@@ -22,6 +22,7 @@
 11.2.2015	02:20-02:50	0,5h	Pitkälti pelkästään refraktorointia.
 11.2.2015	20:00-20:30	0,5h	Javadocia ja vähän koodia.
 12.2.2015	20:25-20:35	0,15h	Luokkakaavion päivittäminen.
+12.2.2015	21:05-21:20	0,25h	Sekvenssikaavioiden tekeminen hyppäämisestä. (kaksi, mutta oikeastaan ovat sama tilanne eri arvoilla, erikseen selkeyden vuoksi)
 
 
 Ps. Tietosto ei gitissä näytä hyvältä suoraan.
