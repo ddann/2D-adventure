@@ -23,6 +23,7 @@
 11.2.2015	20:00-20:30	0,5h	Javadocia ja vähän koodia.
 12.2.2015	20:25-20:35	0,15h	Luokkakaavion päivittäminen.
 12.2.2015	21:05-21:20	0,25h	Sekvenssikaavioiden tekeminen hyppäämisestä. (kaksi, mutta oikeastaan ovat sama tilanne eri arvoilla, erikseen selkeyden vuoksi)
+12.2.2015	23:10-23:20	0,15h	Kaksi sekvenssikaaviota lisää 'oikealle'/'vasemmalle' painalluksesta. (taas sama tilanne, mutta eri arvoja ja seuraa eri asiat)
 
 
 Ps. Tietosto ei gitissä näytä hyvältä suoraan.
