@@ -20,7 +20,8 @@
 7.2.2015	20:45-21:00	0,25h	Hitusen logikkaa ja refraktorointia sekä testi.
 7.2.2015	21:15-21:30	0,25h	Guita + vähän muuta.
 11.2.2015	02:20-02:50	0,5h	Pitkälti pelkästään refraktorointia.
-11.22015	20:00-20:30	0,5h	Javadocia ja vähän koodia.
+11.2.2015	20:00-20:30	0,5h	Javadocia ja vähän koodia.
+12.2.2015	20:25-20:35	0,15h	Luokkakaavion päivittäminen.
 
 
 Ps. Tietosto ei gitissä näytä hyvältä suoraan.
