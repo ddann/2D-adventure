@@ -36,7 +36,7 @@ public class Engine {
 	//TODO: Some way of storing inputs. (for now isn't needed)
 	
 	protected boolean hasLost = false;
-	protected boolean hasWin = false;
+	protected boolean hasWon = false;
 	
 	
 	public Engine() {
@@ -110,7 +110,7 @@ public class Engine {
 	 */
 	public void fullGameLoop() {
 		
-		while (!hasLost && !hasWin) {
+		while (!hasLost && !hasWon) {
 			long timeAtStartingLoop = System.nanoTime();
 			this.doOneLoop();
 			//Should this class use GUI instead of the contrary? TODO: Plan the project's structure for what comes to the GUI.
@@ -123,7 +123,7 @@ public class Engine {
 		//TODO:Something
 		
 		//Only saves for now if won (there is only one stage...)
-		if (this.hasWin) this.saveSave();
+		if (this.hasWon) this.saveSave();
 	}
 	
 	
@@ -133,7 +133,7 @@ public class Engine {
 	 */
 	protected void doOneLoop() {
 		//TODO:Change things based on inputs and boss' "AI".
-		//TODO Attacks before moving?
+		this.attack();
 		this.movePlayer();
 		this.moveByPhisics();
 		this.wallCollisionCheck();
@@ -142,6 +142,14 @@ public class Engine {
 	}
 	
 	
+	/**
+	 * This method is in charge of crating the attacks' objects and making damage to the boss based on hits.
+	 * It also check if the boss' health is 0 or less, and respectively saves the winning to the variable.
+	 */
+	protected void attack() {
+		//TODO The method's functionality
+		if (boss.Health <= 0) hasWon = true;
+	}
 	
 	/**
 	 * A protected method that makes moves/"does things based in players inputs" that are only possible to do by the playable character.

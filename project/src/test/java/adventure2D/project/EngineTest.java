@@ -67,7 +67,7 @@ public class EngineTest {
 	}
 	@Test
 	public void winningEndsLoopDirectly() {
-		engine.hasWin = true;
+		engine.hasWon = true;
 		engine.player.x=1000000;
 		engine.fullGameLoop();
 		assertEquals(engine.player.x, 1000000);
@@ -269,6 +269,28 @@ public class EngineTest {
 	
 	
 	@Test
+	public void attack_BossHealth0() {
+		engine.boss.Health =0;
+		engine.attack();
+		assertTrue(engine.hasWon);
+	}
+	
+	@Test
+	public void attack_BossHealthless0() {
+		engine.boss.Health =-1;
+		engine.attack();
+		assertTrue(engine.hasWon);
+	}
+	
+	@Test
+	public void attack_BossHealthmore0() {
+		engine.boss.Health =1;
+		engine.attack();
+		assertTrue(!engine.hasWon);
+	}
+	
+	
+	@Test
 	public void movePlayer_Jump0() {
 		engine.player.hasJumped =true;
 		engine.player.y = engine.stage.height-1;
@@ -432,6 +454,21 @@ public class EngineTest {
 		engine.player.y = -1;
 		engine.doOneLoop();
 		assertEquals(engine.player.y, 0);
+	}
+	
+	@Test
+	public void doOneLoopTest_attack() {
+		engine.boss.Health =0;
+		engine.doOneLoop();
+		assertTrue(engine.hasWon);
+	}
+	
+	@Test
+	public void doOneLoopTest_wallCollisionCheck() {
+		engine.player.y = engine.stage.height-1;
+		engine.player.accelerationy =1;
+		engine.doOneLoop();
+		assertEquals(engine.player.accelerationy, 0, 0.00001);
 	}
 	
 	
