@@ -16,6 +16,13 @@ public class Player extends Character{
 	boolean toRight = false;
 	boolean shoot = false;
 	
+	
+	/**
+	 * This is the "time"/loops that is to be waited until the player can shoot again.
+	 */
+	int timeSinceNextShoot=0;
+	
+	
 	public Player(int x, int y) {
 		super(x, y, 100);
 	}

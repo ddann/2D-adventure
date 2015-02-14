@@ -105,7 +105,7 @@ public class Engine {
 	
 	
 	/**
-	 * The class' "main method" that is the method that calls all the methods that makes the game run, call the GUI to draw and wait the needed time for steady FPS.
+	 * The class' "main method" that is the method that calls the method that makes the game run, call the GUI to draw and wait the needed time for steady FPS.
 	 * It starts the game loop, then at ending the game it may "save".
 	 */
 	public void fullGameLoop() {
@@ -130,25 +130,45 @@ public class Engine {
 	/**
 	 * This method is just a method for making the code more readable as all 'things' hasn't to be calculated in just one method.
 	 * In other word it just make calls to other methods that are in charge of the game's running.
+	 * And a one-liner check if the player has lost or win.
 	 */
 	protected void doOneLoop() {
 		//TODO:Change things based on inputs and boss' "AI".
 		this.attack();
+		this.checkAttacksCollision();
 		this.movePlayer();
 		this.moveByPhisics();
 		this.wallCollisionCheck();
 		this.overStageTest();
-		this.detectCollision();
+		if (boss.Health <= 0) hasWon = true;
+		if (this.detectCollision(player, boss)) this.hasLost = true;;
 	}
 	
 	
+
+
 	/**
 	 * This method is in charge of crating the attacks' objects and making damage to the boss based on hits.
 	 * It also check if the boss' health is 0 or less, and respectively saves the winning to the variable.
 	 */
 	protected void attack() {
-		//TODO The method's functionality
-		if (boss.Health <= 0) hasWon = true;
+		if (player.shoot && player.timeSinceNextShoot <1) {
+			//TODO shooting
+			player.timeSinceNextShoot =5; //5* 1/60s is the minimum time between shoots.
+		}
+	    player.timeSinceNextShoot-=1;
+	    
+	    //TODO Boss shooting...I have no idea how to do it by 'AI'.
+	}
+	
+	/**
+	 * abc
+	 */
+	private void checkAttacksCollision() {
+		for (GameObject object: objectList) {
+			if (object.type==1 && this.detectCollision(object, player)) this.hasLost = true;
+			else if (object.type==0 && this.detectCollision(object, boss)) boss.Health -= 50;
+		}
 	}
 	
 	/**
@@ -240,10 +260,11 @@ public class Engine {
 	 * Detects if there has been a collision, in such a case if it is player and boss, then the "player is killed".
 	 * For now it is a simple circle implementation.
 	 */
-	protected void detectCollision() {
-		if (Math.sqrt((player.x - boss.x)*(player.x - boss.x) + (player.y - boss.y)*(player.y - boss.y)) < player.radius + boss.radius) {
-			this.hasLost = true;
+	protected boolean detectCollision(GObject ob1, GObject ob2) {
+		if (Math.sqrt((ob1.x - ob2.x)*(ob1.x - ob2.x) + (ob1.y - ob2.y)*(ob1.y - ob2.y)) < ob1.radius + ob2.radius) {
+			return true;
 		}
+		return false;
 	}
 	
 }

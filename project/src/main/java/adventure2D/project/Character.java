@@ -8,9 +8,7 @@ package adventure2D.project;
  * @param y the character's starting y-coordinate
  * @param radius the character's radius
  */
-public abstract class Character {
-
-	int x, y, radius;
+public abstract class Character extends GObject{
 	
 	double speedx = 0;
 	double speedy = 0;
@@ -19,9 +17,7 @@ public abstract class Character {
 	double accelerationy = 0;
 	
 	public Character(int x, int y, int radius) {
-		this.x = x;
-		this.y = y;
-		this.radius = radius;
+		super(x, y, radius);
 	}
 	
 	

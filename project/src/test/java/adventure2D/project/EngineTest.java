@@ -176,8 +176,7 @@ public class EngineTest {
 	//Tests actually the Stage. (useful indeed)
 	@Test
 	public void charactersDoNotcollideAtTheBeginning() {
-		engine.detectCollision();
-		assertEquals(engine.hasLost, false);
+		assertTrue(!engine.detectCollision(engine.player, engine.boss));
 	}
 	
 	//These tests are for now "hard-coded". They "know" the radius of the characters.
@@ -187,8 +186,7 @@ public class EngineTest {
 		engine.player.x = 200;
 		engine.boss.y = 0;
 		engine.player.y = 1000;
-		engine.detectCollision();
-		assertEquals(engine.hasLost, false);
+		assertTrue(!engine.detectCollision(engine.player, engine.boss));
 	}
 	
 	@Test
@@ -197,40 +195,35 @@ public class EngineTest {
 		engine.player.y = 200;
 		engine.boss.x = 0;
 		engine.player.x = 1000;
-		engine.detectCollision();
-		assertEquals(engine.hasLost, false);
+		assertTrue(!engine.detectCollision(engine.player, engine.boss));
 	}
 	
 	@Test
 	public void detectCollision3() {
 		engine.boss.x = 0;
 		engine.player.x = engine.stage.width-1;
-		engine.detectCollision();
-		assertEquals(engine.hasLost, false);
+		assertTrue(!engine.detectCollision(engine.player, engine.boss));
 	}
 	
 	@Test
 	public void detectCollision4() {
 		engine.boss.y = 0;
 		engine.player.y = engine.stage.height-1;
-		engine.detectCollision();
-		assertEquals(engine.hasLost, false);
+		assertTrue(!engine.detectCollision(engine.player, engine.boss));
 	}
 	
 	@Test
 	public void detectCollision5() {
 		engine.boss.x = engine.stage.width-1;
 		engine.player.x = 0;
-		engine.detectCollision();
-		assertEquals(engine.hasLost, false);
+		assertTrue(!engine.detectCollision(engine.player, engine.boss));
 	}
 	
 	@Test
 	public void detectCollision6() {
 		engine.boss.y = engine.stage.height-1;
 		engine.player.y = 0;
-		engine.detectCollision();
-		assertEquals(engine.hasLost, false);
+		assertTrue(!engine.detectCollision(engine.player, engine.boss));
 	}
 	
 	@Test
@@ -239,8 +232,7 @@ public class EngineTest {
 		engine.player.y = 200 + engine.boss.radius;
 		engine.boss.x = 0;
 		engine.player.x = 0 +engine.player.radius-1;
-		engine.detectCollision();
-		assertEquals(engine.hasLost, true);
+		assertTrue(engine.detectCollision(engine.player, engine.boss));
 	}
 	
 	@Test
@@ -251,8 +243,7 @@ public class EngineTest {
 		engine.player.y = 4;
 		engine.boss.x = 0;
 		engine.player.x = 4;
-		engine.detectCollision();
-		assertEquals(engine.hasLost, false);
+		assertTrue(!engine.detectCollision(engine.player, engine.boss));
 	}
 	
 	@Test
@@ -263,8 +254,7 @@ public class EngineTest {
 		engine.player.y = 1;
 		engine.boss.x = 0;
 		engine.player.x = 2;
-		engine.detectCollision();
-		assertEquals(engine.hasLost, true);
+		assertTrue(engine.detectCollision(engine.player, engine.boss));
 	}
 	
 	
