@@ -140,6 +140,7 @@ public class Engine {
 		this.moveByPhisics();
 		this.wallCollisionCheck();
 		this.overStageTest();
+		this.moveObjects();
 		if (boss.Health <= 0) hasWon = true;
 		if (this.detectCollision(player, boss)) this.hasLost = true;;
 	}
@@ -162,9 +163,10 @@ public class Engine {
 	}
 	
 	/**
-	 * abc
+	 * This method checks if any 'hostile'(attack-object of "opposite side") object has touch a character and damages it based on which character/attack has happened.
+	 * Note: for now player dies, if object created by boss and respectively boss' looses a static value of health.
 	 */
-	private void checkAttacksCollision() {
+	protected void checkAttacksCollision() {
 		for (GameObject object: objectList) {
 			if (object.type==1 && this.detectCollision(object, player)) this.hasLost = true;
 			else if (object.type==0 && this.detectCollision(object, boss)) boss.Health -= 50;
@@ -195,7 +197,16 @@ public class Engine {
 		}
 		else {
 			player.accelerationx *=  0.8;//If player is not pressing left or right, character stops moving left or right. In that case drop x-speed.
-			//TODO if the speed is low enough stop character (and acceleration)
+			//TODO if the speed is low enough stop character (and acceleration), done but check values
+			if (player.speedx < 3*timeStep) {
+				player.speedx=0;
+				player.accelerationx=0;
+			}
+			//TODO the below it's most probably senseless and useless/bad.
+			//if (player.speedy < 3*timeStep) {
+			//	player.speedy=0;
+			//	player.accelerationy=0;
+			//}
 		}
 		
 	}
@@ -257,8 +268,20 @@ public class Engine {
 	}
 	
 	/**
+	 * This method makes the objects move based on their static speed.
+	 */
+	protected void moveObjects() {
+		for (GameObject object: objectList) {
+			object.x+= object.speedx * timeStep;
+			object.y+= object.speedy * timeStep;
+		}
+	}
+	
+	/**
 	 * Detects if there has been a collision, in such a case if it is player and boss, then the "player is killed".
 	 * For now it is a simple circle implementation.
+	 * @param ob1 a GObject to test if collides with the other.
+	 * @param ob2 a GObject to test if collides with the other.
 	 */
 	protected boolean detectCollision(GObject ob1, GObject ob2) {
 		if (Math.sqrt((ob1.x - ob2.x)*(ob1.x - ob2.x) + (ob1.y - ob2.y)*(ob1.y - ob2.y)) < ob1.radius + ob2.radius) {

@@ -1,0 +1,3 @@
+ 
+Javadocci on tehty myös kaikille protected metodeille, koska muuten paljon metodien dokumentoimista ei olisi, koska lähes jokainen on protected. (sekä nyt teki mieli oikeastaan osittain...)
+(tiedän ettei ole tapana, mutta voi näinkin tehdä)

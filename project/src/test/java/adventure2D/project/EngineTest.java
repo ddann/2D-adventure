@@ -261,21 +261,21 @@ public class EngineTest {
 	@Test
 	public void attack_BossHealth0() {
 		engine.boss.Health =0;
-		engine.attack();
+		engine.doOneLoop();
 		assertTrue(engine.hasWon);
 	}
 	
 	@Test
 	public void attack_BossHealthless0() {
 		engine.boss.Health =-1;
-		engine.attack();
+		engine.doOneLoop();
 		assertTrue(engine.hasWon);
 	}
 	
 	@Test
 	public void attack_BossHealthmore0() {
 		engine.boss.Health =1;
-		engine.attack();
+		engine.doOneLoop();
 		assertTrue(!engine.hasWon);
 	}
 	
@@ -461,6 +461,14 @@ public class EngineTest {
 		assertEquals(engine.player.accelerationy, 0, 0.00001);
 	}
 	
+	@Test
+	public void doOneLoopTest_moveObjects() {
+		GameObject go = new GameObject(0, 0, 0, 10, 10, 0);
+		engine.objectList.add(go);
+		engine.moveObjects();
+		assertEquals(go.x, 10*engine.timeStep, 0.00001);
+	}
+	
 	
 	@Test
 	public void FullGameLoopTest_OneLoopCall() {
@@ -487,6 +495,23 @@ public class EngineTest {
 	@Test
 	public void createsInputManager() {
 		assertTrue(engine.inputManager != null);
+	}
+	
+	
+	@Test
+	public void moveObjectsTestx() {
+		GameObject go = new GameObject(0, 0, 0, 10, 10, 0);
+		engine.objectList.add(go);
+		engine.moveObjects();
+		assertEquals(go.x, 10*engine.timeStep, 0.00001);
+	}
+	
+	@Test
+	public void moveObjectsTesty() {
+		GameObject go = new GameObject(0, 0, 0, 10, 10, 0);
+		engine.objectList.add(go);
+		engine.moveObjects();
+		assertEquals(go.y, 10*engine.timeStep, 0.00001);
 	}
 
 }

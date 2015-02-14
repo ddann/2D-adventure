@@ -26,6 +26,7 @@
 12.2.2015	23:10-23:20	0,15h	Kaksi sekvenssikaaviota lisää 'oikealle'/'vasemmalle' painalluksesta. (taas sama tilanne, mutta eri arvoja ja seuraa eri asiat)
 12.2.2015	23:25-23:55	0,5h	Vähän koodia, testeja sekä pitin raportin generointi.
 14.2.2015	20:00-21:00	1h	Koodia sekä tärkeä refraktorointi/metodin yleistäminen.
+15.2.2015	00:15-01:00	0,75h	Koodia sekä vähän testejä sekä javadoccia.
 
 
 Ps. Tietosto ei gitissä näytä hyvältä suoraan.
