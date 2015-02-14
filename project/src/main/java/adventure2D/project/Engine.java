@@ -113,7 +113,7 @@ public class Engine {
 		while (!hasLost && !hasWon) {
 			long timeAtStartingLoop = System.nanoTime();
 			this.doOneLoop();
-			//Should this class use GUI instead of the contrary? TODO: Plan the project's structure for what comes to the GUI.
+			//TODO: call the GUI class to draw the game's state.
 			
 			while( System.nanoTime()-timeAtStartingLoop <= 16666666 );
 			//Best way to wait the extra-time (eg. Thread.sleep() Inaccurate), works with any display's refresh-rate.
@@ -130,7 +130,7 @@ public class Engine {
 	/**
 	 * This method is just a method for making the code more readable as all 'things' hasn't to be calculated in just one method.
 	 * In other word it just make calls to other methods that are in charge of the game's running.
-	 * And a one-liner check if the player has lost or win.
+	 * And two one-liner checks if the player has lost or win.
 	 */
 	protected void doOneLoop() {
 		//TODO:Change things based on inputs and boss' "AI".
@@ -154,7 +154,7 @@ public class Engine {
 	 */
 	protected void attack() {
 		if (player.shoot && player.timeSinceNextShoot <1) {
-			//TODO shooting
+			this.objectList.add(new GameObject(player.x, player.y, 50, 10,0,0)); //TODO check values by play-testing.
 			player.timeSinceNextShoot =5; //5* 1/60s is the minimum time between shoots.
 		}
 	    player.timeSinceNextShoot-=1;
@@ -169,7 +169,10 @@ public class Engine {
 	protected void checkAttacksCollision() {
 		for (GameObject object: objectList) {
 			if (object.type==1 && this.detectCollision(object, player)) this.hasLost = true;
-			else if (object.type==0 && this.detectCollision(object, boss)) boss.Health -= 50;
+			else if (object.type==0 && this.detectCollision(object, boss)) {
+				boss.Health -= 50;
+				objectList.remove(object);
+			}
 		}
 	}
 	
