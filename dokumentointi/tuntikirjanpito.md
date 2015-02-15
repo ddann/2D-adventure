@@ -28,6 +28,7 @@
 14.2.2015	20:00-21:00	1h	Koodia sekä tärkeä refraktorointi/metodin yleistäminen.
 15.2.2015	00:15-01:00	0,75h	Koodia sekä vähän testejä sekä javadoccia.
 15.2.2015	01:00-01:15	0,25h	Loput logiikasta, jonka jälkeen peli olisi pelattava jollakin tavalla (lopulta!). Tosin ei vielä GUIta...
+15.2.2015	19:30-20:00	0,5h	Testejä, pitin rapportin generointi (väliaikainen) ja korjaus.
 
 
 Ps. Tietosto ei gitissä näytä hyvältä suoraan.

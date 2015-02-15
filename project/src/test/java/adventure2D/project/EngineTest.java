@@ -447,11 +447,30 @@ public class EngineTest {
 	}
 	
 	@Test
-	public void doOneLoopTest_attack() {
+	public void doOneLoopTest_attack_bossHealth() {
 		engine.boss.Health =0;
 		engine.doOneLoop();
 		assertTrue(engine.hasWon);
 	}
+	
+	@Test
+	public void doOneLoopTest_attack_shoot() {
+		engine.player.shoot = true;
+		engine.doOneLoop();
+		assertTrue(!engine.player.shoot);
+		assertTrue(!engine.objectList.isEmpty());
+	}
+	
+	@Test
+	public void doOneLoopTest_moveByphisics() {
+		engine.player.y = engine.stage.height-1;
+		engine.player.x =100;
+		engine.player.speedx=1;
+		engine.doOneLoop();
+		assertEquals(engine.player.x, 100 + 1/60, 0.00001);
+	}
+	
+	
 	
 	@Test
 	public void doOneLoopTest_wallCollisionCheck() {
@@ -465,8 +484,22 @@ public class EngineTest {
 	public void doOneLoopTest_moveObjects() {
 		GameObject go = new GameObject(0, 0, 0, 10, 10, 0);
 		engine.objectList.add(go);
-		engine.moveObjects();
+		engine.doOneLoop();
 		assertEquals(go.x, 10*engine.timeStep, 0.00001);
+	}
+	
+	@Test
+	public void doOneLoopTest_Winning() {
+		engine.boss.Health = 0;
+		engine.doOneLoop();
+		assertTrue(engine.hasWon);
+	}
+	
+	@Test
+	public void doOneLoopTest_loosing() {
+		engine.player.radius =10000; // the most sencefull may so that other methods doesn't affect the test.
+		engine.doOneLoop();
+		assertTrue(engine.hasLost);
 	}
 	
 	
@@ -492,6 +525,8 @@ public class EngineTest {
 		assertEquals(System.nanoTime() - timeAtStartingCall > 16666666, true);
 	}
 	
+	
+	
 	@Test
 	public void createsInputManager() {
 		assertTrue(engine.inputManager != null);
@@ -512,6 +547,21 @@ public class EngineTest {
 		engine.objectList.add(go);
 		engine.moveObjects();
 		assertEquals(go.y, 10*engine.timeStep, 0.00001);
+	}
+	
+	@Test
+	public void checkAttacksCollision_player() {
+		engine.objectList.add(new GameObject(engine.player.x, engine.player.y, 100, 0, 0, 1));
+		engine.checkAttacksCollision();
+		assertTrue(engine.hasLost);
+	}
+	
+	@Test
+	public void checkAttacksCollision_boss() {
+		engine.objectList.add(new GameObject(engine.boss.x, engine.boss.y, 100, 0, 0, 0));
+		engine.boss.Health = 50;
+		engine.checkAttacksCollision();
+		assertEquals(engine.boss.Health, 0);
 	}
 
 }
