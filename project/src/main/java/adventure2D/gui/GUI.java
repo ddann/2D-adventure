@@ -43,10 +43,22 @@ public class GUI extends JPanel implements Runnable{
 	}
 	
 	
+	
 	public void drawFrame() {
 		super.repaint();
 	}
+	
+	
+	public void victoryScreen() {
+		//TODO something that would tell the player about the victory.
+	}
+	
+	public void looseScreen() {
+		//TODO something that would tell the player about the loosing.
+	}
+	
 
+	
 
 	@Override
 	public void run() {

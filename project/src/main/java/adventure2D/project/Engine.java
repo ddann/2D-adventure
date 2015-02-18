@@ -115,6 +115,17 @@ public class Engine {
 		SwingUtilities.invokeLater(gui);
 		
 		while (!hasLost && !hasWon) {
+			System.out.println(player.x);
+			System.out.println(player.y);
+			System.out.println(player.toLeft);
+			System.out.println(player.toRight);
+			System.out.println(player.speedx);
+			System.out.println(player.speedy);
+			System.out.println("---");
+			System.out.println(player.accelerationx);
+			System.out.println(player.accelerationy);
+			System.out.println("___");
+			
 			long timeAtStartingLoop = System.nanoTime();
 			this.doOneLoop();
 			gui.drawFrame();
@@ -124,10 +135,12 @@ public class Engine {
 			//But keeps one thread completely busy, bad if using battery or if single-core(they are only old notebooks however);
 			//There were other ways, but only for C++.
 		}
-		//TODO:Something
-		
 		//Only saves for now if won (there is only one stage...)
-		if (this.hasWon) this.saveSave();
+		if (this.hasWon) {
+			this.saveSave();
+			gui.victoryScreen();
+		}
+		else gui.looseScreen();
 	}
 	
 	
@@ -172,12 +185,19 @@ public class Engine {
 	 * Note: for now player dies, if object created by boss and respectively boss' looses a static value of health.
 	 */
 	protected void checkAttacksCollision() {
+		LinkedList<GameObject> removeList = new LinkedList<GameObject>();
+		
 		for (GameObject object: objectList) {
 			if (object.type==1 && this.detectCollision(object, player)) this.hasLost = true;
 			else if (object.type==0 && this.detectCollision(object, boss)) {
 				boss.Health -= 50;
-				objectList.remove(object);
+				//objectList.remove(object); For some reason "makes the game crash".
+				removeList.add(object);
 			}
+		}
+		
+		for (GameObject object: removeList) {
+			objectList.remove(object);
 		}
 	}
 	
@@ -185,12 +205,13 @@ public class Engine {
 	 * A protected method that makes moves/"does things based in players inputs" that are only possible to do by the playable character.
 	 */
 	protected void movePlayer() {
-		if (player.y != stage.height-1) {
-			player.accelerationy += g * timeStep; //Just drops faster and faster... TODO Maybe falling speed should be limited. 
+		//TODO CHECK THE VALUES!
+		if (player.y != stage.height - player.radius -1) {
+			player.accelerationy += 30*g * timeStep; //Just drops faster and faster... TODO Maybe falling speed should be limited. 
 		}
 		else if (player.hasJumped) {
 			//The jump's force is calculated directly as acceleration, inaccurate physics... 
-			player.accelerationy -= 50 * timeStep;
+			player.accelerationy -= 22250 * timeStep;
 		}
 		player.hasJumped = false;
 		
@@ -198,15 +219,15 @@ public class Engine {
 		//Change calculated based on already had acceleration.
 		//Do something if player is going to move left/right, if both (possible with keyboard) do like it would be no press.
 		if (player.toLeft && !player.toRight) {
-			if (player.accelerationx >-7) player.accelerationx =  player.accelerationx - (7 + player.accelerationx)*timeStep;
+			if (player.accelerationx >-200) player.accelerationx =  player.accelerationx - (200 + player.accelerationx)*timeStep;
 		}
 		else if (player.toRight && !player.toLeft) {
-			if (player.accelerationx <7) player.accelerationx =  player.accelerationx + (7 - player.accelerationx)*timeStep;
+			if (player.accelerationx <200) player.accelerationx =  player.accelerationx + (200 - player.accelerationx)*timeStep;
 		}
 		else {
 			player.accelerationx *=  0.8;//If player is not pressing left or right, character stops moving left or right. In that case drop x-speed.
 			//TODO if the speed is low enough stop character (and acceleration), done but check values
-			if (player.speedx < 3*timeStep) {
+			if (player.speedx < 30*timeStep) {
 				player.speedx=0;
 				player.accelerationx=0;
 			}
@@ -240,7 +261,7 @@ public class Engine {
 	protected void wallCollisionCheck() {
 		for (Character c: characterList) {
 			//Characters doesn't bounce. (They loose all kinetic energy at a "collision" with the stage's edge.)
-			if (c.y >= stage.height-1) {
+			if (c.y >= stage.height - c.radius -1) {
 				if (c.accelerationy > 0) c.accelerationy =0;
 				if (c.speedy > 0) c.speedy =0;
 			}
@@ -248,7 +269,7 @@ public class Engine {
 				if (c.accelerationy < 0) c.accelerationy =0;
 				if (c.speedy < 0) c.speedy =0;
 			}
-			if (c.x >= stage.width-1) {
+			if (c.x >= stage.width - c.radius -1) {
 				if (c.accelerationx > 0) c.accelerationx =0;
 				if (c.speedx > 0) c.speedx =0;
 			}
@@ -268,9 +289,9 @@ public class Engine {
 		//(maybe)TODO: In case of the player going over stage it could be a loose.
 		//The boss should't go over the stage, but in case it happens... (would it be actually a bug?)
 		for (Character c: characterList) {
-			if (c.x >= stage.width) c.x = stage.width-1;
+			if (c.x >= stage.width - c.radius) c.x = stage.width - c.radius  -1;
 			else if (c.x < 0) c.x = 0;
-			if (c.y >= stage.height) c.y = stage.height-1;
+			if (c.y >= stage.height - c.radius) c.y = stage.height - c.radius  -1;
 			else if (c.y < 0) c.y = 0;
 		}
 	}

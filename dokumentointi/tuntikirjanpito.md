@@ -30,6 +30,7 @@
 15.2.2015	01:00-01:15	0,25h	Loput logiikasta, jonka jälkeen peli olisi pelattava jollakin tavalla (lopulta!). Tosin ei vielä GUIta...
 15.2.2015	19:30-20:00	0,5h	Testejä, pitin rapportin generointi (väliaikainen) ja korjaus.
 18.2.2015	16:00-18:30	2,5h	GUI ja (reilusti) infon lukemista siitä miten sen sais tehtyä.
+18.2.2015	21:00-21:30	0,5h	'Testipelaamista' ja vakioiden säätelyä (no ovat vielä vähän mitä sattuu)... sekä bugin korjaaminen joka kaatoi ohjelman.
 
 
 Ps. Tietosto ei gitissä näytä hyvältä suoraan.
