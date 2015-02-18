@@ -1,5 +1,11 @@
 package adventure2D.project;
 
+/**
+ * This class is the abstract super class for all the objects of the game (whether they are characters or other type of objects).
+ * @param x the objects's starting x-coordinate
+ * @param y the objects's starting y-coordinate
+ * @param radius the object's radius
+ */
 public abstract class GObject {
 
 	int x, y, radius;

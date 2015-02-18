@@ -21,7 +21,7 @@ public class Engine {
 	protected InputManager inputManager;
 	protected GUI gui;
 
-	private File save = new File("save.save"); //Just a normal text file in the program's root folder, it' s the game's save (nothing sencefull to save for now).
+	private File save = new File("save.save"); //Just a normal text file in the program's root folder, it's the game's save (nothing sencefull to save for now).
 	
 	protected Stage stage; //There is only one for now.
 	protected Player player;
@@ -31,7 +31,7 @@ public class Engine {
 	
 	protected LinkedList<GameObject> objectList = new LinkedList<GameObject>();
 	
-	protected int g = 10; //It is actually the acceleration down (there is no  air resistance...)
+	protected int g = 10; //It would be the game's value to gravity, but the value isn't use anymore/for now (directly).
 	
 	protected double timeStep = 1.0/60.0;
 	
@@ -109,6 +109,7 @@ public class Engine {
 	/**
 	 * The class' "main method" that is the method that calls the method that makes the game run, call the GUI to draw and wait the needed time for steady FPS.
 	 * It starts the game loop, then at ending the game it may "save".
+	 * Physics simulation is done with Euler integration and collision detections between objects with spherical collision detection.
 	 */
 	public void fullGameLoop() {
 		
@@ -205,7 +206,7 @@ public class Engine {
 	 * A protected method that makes moves/"does things based in players inputs" that are only possible to do by the playable character.
 	 */
 	protected void movePlayer() {
-		//TODO CHECK THE VALUES!
+		//TODO CHECK THE VALUES OF THE METHOD!
 		if (player.y != stage.height - player.radius -1) {
 			player.accelerationy += 30*g * timeStep; //Just drops faster and faster... TODO Maybe falling speed should be limited. 
 		}
@@ -226,11 +227,11 @@ public class Engine {
 		}
 		else {
 			player.accelerationx *=  0.8;//If player is not pressing left or right, character stops moving left or right. In that case drop x-speed.
-			//TODO if the speed is low enough stop character (and acceleration), done but check values
-			if (player.speedx < 30*timeStep) {
-				player.speedx=0;
-				player.accelerationx=0;
-			}
+			//TODO if the speed is low enough stop character (and acceleration), done but check values. Not in use for now.
+			//if (player.speedx < 3*timeStep) {
+			//	player.speedx=0;
+			//	player.accelerationx=0;
+			//}
 			//TODO the below it's most probably senseless and useless/bad.
 			//if (player.speedy < 3*timeStep) {
 			//	player.speedy=0;
@@ -242,6 +243,7 @@ public class Engine {
 	
 	/**
 	 * Moves all the characters based in physics laws. (some "hard-coded" calculations.)
+	 * This is done with Euler integration. (acceleration calculation is omitted here)
 	 */
 	protected void moveByPhisics() {
 		//TODO:Something based on the boss AI.

@@ -18,12 +18,11 @@ import adventure2D.project.Stage;
  * @param characterList a list containing the characters in the stage.
  * @param objectList a list containing the objects in the stage.
  * @param stage the stage to be draw.
+ * @param inputManager a input manager(extends key listener), that makes possible to listen to the inputs of the player.
  */
 public class GUI extends JPanel implements Runnable{
 	
-	/**
-	 * 
-	 */
+	
 	private static final long serialVersionUID = 1L; //???
 	
 	private List<Character> characterList;
@@ -43,16 +42,23 @@ public class GUI extends JPanel implements Runnable{
 	}
 	
 	
-	
+	/**
+	 * This method draws a frame of the game, that's said it draws the current situation of the game.
+	 */
 	public void drawFrame() {
 		super.repaint();
 	}
 	
-	
+	/**
+	 * Makes a graphical representation to show the player that (s)he has win.
+	 */
 	public void victoryScreen() {
 		//TODO something that would tell the player about the victory.
 	}
 	
+	/**
+	 * Makes a graphical representation to show the player that (s)he has lost.
+	 */
 	public void looseScreen() {
 		//TODO something that would tell the player about the loosing.
 	}

@@ -10,15 +10,15 @@ public class  Stage {
 	//AND first is better to just try to have one stage and one boss.
 	//Numbers are for now random.
 	
-	int width = 1200;
-	int height = 800;
+	int width = 1920;
+	int height = 1080;
 	
 	int playerPositionX = 222;
 	int playerPositionY = 222;
 	
-	int bossPositionX = 677; //777
-	int bosspositionY =677; //777
-	int bossradius = 30; //300
+	int bossPositionX = 999;
+	int bosspositionY =222;
+	int bossradius = 300;
 	int bossHealth = 1000;
 	
 	
