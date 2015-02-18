@@ -1,7 +1,6 @@
 # 2D-adventure
 
-A fighting oriented boss-rush styled  extremely hard 2D-platformer.
-
+A fighting oriented platformer boss-fight with "abstract graphics".
 
 Testaaminen pakottaa luokan muuttujat/metodit private -> protected... muuten menee sekoiluksi.
 
