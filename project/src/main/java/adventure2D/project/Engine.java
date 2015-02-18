@@ -116,16 +116,16 @@ public class Engine {
 		SwingUtilities.invokeLater(gui);
 		
 		while (!hasLost && !hasWon) {
-			System.out.println(player.x);
-			System.out.println(player.y);
-			System.out.println(player.toLeft);
-			System.out.println(player.toRight);
-			System.out.println(player.speedx);
-			System.out.println(player.speedy);
-			System.out.println("---");
-			System.out.println(player.accelerationx);
-			System.out.println(player.accelerationy);
-			System.out.println("___");
+			//System.out.println(player.x);
+			//System.out.println(player.y);
+			//System.out.println(player.toLeft);
+			//System.out.println(player.toRight);
+			//System.out.println(player.speedx);
+			//System.out.println(player.speedy);
+			//System.out.println("---");
+			//System.out.println(player.accelerationx);
+			//System.out.println(player.accelerationy);
+			//System.out.println("___");
 			
 			long timeAtStartingLoop = System.nanoTime();
 			this.doOneLoop();

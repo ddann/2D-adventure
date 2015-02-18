@@ -89,7 +89,7 @@ public class EngineTest {
 		engine.characterList.add(c);
 		c.x+= 100000;
 		engine.overStageTest();
-		assertEquals(c.x, engine.stage.width-1);
+		assertEquals(c.x, engine.stage.width - c.radius -1);
 	}
 	@Test
 	public void overStageTest3() {
@@ -105,7 +105,7 @@ public class EngineTest {
 		engine.characterList.add(c);
 		c.y+= 100000;
 		engine.overStageTest();
-		assertEquals(c.y, engine.stage.height-1);
+		assertEquals(c.y, engine.stage.height -c.radius  -1);
 	}
 	@Test
 	public void overStageTest5() {
@@ -123,7 +123,7 @@ public class EngineTest {
 		engine.characterList.add(c);
 		c.y+= engine.stage.height;
 		engine.overStageTest();
-		assertEquals(c.y, engine.stage.height-1);
+		assertEquals(c.y, engine.stage.height - c.radius  -1);
 	}
 	@Test
 	public void overStageTest7() {
@@ -131,7 +131,7 @@ public class EngineTest {
 		engine.characterList.add(c);
 		c.x+= engine.stage.width;
 		engine.overStageTest();
-		assertEquals(c.x, engine.stage.width-1);
+		assertEquals(c.x, engine.stage.width - c.radius  -1);
 	}
 	@Test
 	public void overStageTest8() {
@@ -291,9 +291,9 @@ public class EngineTest {
 	@Test
 	public void movePlayer_Jump1() {
 		engine.player.hasJumped =true;
-		engine.player.y = engine.stage.height-1;
+		engine.player.y = engine.stage.height - engine.player.radius  -1;
 		engine.movePlayer();
-		assertEquals(engine.player.accelerationx, 50 * engine.timeStep, 0.00001);
+		assertEquals(engine.player.accelerationy, -22250 * engine.timeStep, 0.00001);
 	}
 	
 	@Test
@@ -308,30 +308,30 @@ public class EngineTest {
 	public void movePlayer_playerDirection_Left() {
 		engine.player.toLeft = true;
 		engine.movePlayer();
-		assertEquals(engine.player.accelerationx, - 7 * engine.timeStep, 0.00001);
+		assertEquals(engine.player.accelerationx, - 200 * engine.timeStep, 0.00001);
 	}
 	
 	@Test
 	public void movePlayer_playerDirection_Right() {
 		engine.player.toRight = true;
 		engine.movePlayer();
-		assertEquals(engine.player.accelerationx, 7 * engine.timeStep, 0.00001);
+		assertEquals(engine.player.accelerationx, 200 * engine.timeStep, 0.00001);
 	}
 	
 	@Test
 	public void movePlayer_playerDirection_Left2() {
 		engine.player.toLeft = true;
-		engine.player.accelerationx =-10;
+		engine.player.accelerationx =-1000;
 		engine.movePlayer();
-		assertEquals(engine.player.accelerationx, -10, 0.00001);
+		assertEquals(engine.player.accelerationx, -1000, 0.00001);
 	}
 	
 	@Test
 	public void movePlayer_playerDirection_Right2() {
 		engine.player.toRight = true;
-		engine.player.accelerationx =10;
+		engine.player.accelerationx =1000;
 		engine.movePlayer();
-		assertEquals(engine.player.accelerationx, 10, 0.00001);
+		assertEquals(engine.player.accelerationx, 1000, 0.00001);
 	}
 	
 	@Test
@@ -342,17 +342,17 @@ public class EngineTest {
 	}
 
 	@Test
-	public void moveByPhisics1() {
+	public void movePlayer_Falling1() {
 		engine.player.y = 555;
-		engine.moveByPhisics();
-		double expected = engine.g * engine.timeStep;
+		engine.movePlayer();
+		double expected = 30*engine.g * engine.timeStep;
 		assertEquals(engine.player.accelerationy, expected, 0.00001);
 	}
 	
 	@Test
-	public void moveByPhisics2() {
-		engine.player.y = engine.stage.height-1;
-		engine.moveByPhisics();
+	public void movePlayer_Falling2() {
+		engine.player.y = engine.stage.height - engine.player.radius  -1;
+		engine.movePlayer();
 		assertEquals(engine.player.accelerationy, 0, 0.00001);
 	}
 	
@@ -485,7 +485,7 @@ public class EngineTest {
 		GameObject go = new GameObject(0, 0, 0, 10, 10, 0);
 		engine.objectList.add(go);
 		engine.doOneLoop();
-		assertEquals(go.x, 10*engine.timeStep, 0.00001);
+		assertEquals(go.x, 1); //It rounds it to int...
 	}
 	
 	@Test
@@ -497,7 +497,8 @@ public class EngineTest {
 	
 	@Test
 	public void doOneLoopTest_loosing() {
-		engine.player.radius =10000; // the most sencefull may so that other methods doesn't affect the test.
+		engine.player.x = engine.boss.x;
+		engine.player.y = engine.boss.y;
 		engine.doOneLoop();
 		assertTrue(engine.hasLost);
 	}
@@ -538,7 +539,7 @@ public class EngineTest {
 		GameObject go = new GameObject(0, 0, 0, 10, 10, 0);
 		engine.objectList.add(go);
 		engine.moveObjects();
-		assertEquals(go.x, 10*engine.timeStep, 0.00001);
+		assertEquals(go.x, 1);
 	}
 	
 	@Test
@@ -546,7 +547,7 @@ public class EngineTest {
 		GameObject go = new GameObject(0, 0, 0, 10, 10, 0);
 		engine.objectList.add(go);
 		engine.moveObjects();
-		assertEquals(go.y, 10*engine.timeStep, 0.00001);
+		assertEquals(go.y, 1);
 	}
 	
 	@Test

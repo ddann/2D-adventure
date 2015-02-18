@@ -32,7 +32,7 @@
 18.2.2015	16:00-18:30	2,5h	GUI ja (reilusti) infon lukemista siitä miten sen sais tehtyä.
 18.2.2015	21:00-21:30	0,5h	'Testipelaamista' ja vakioiden säätelyä (no ovat vielä vähän mitä sattuu)... sekä bugin korjaaminen joka kaatoi ohjelman + muita pienempiä korjauksia. (monet testit ovat nyt toki 'rikki'...)
 18.2.2015	23:00-23:30	0,5h	'Testipelaamista' + vähän kaikkea.
-
+19.2.2015	00:25-00:40	0,25h	Korjailtu testejä. (huomattu Issue: cordinaatit ovat inttejä "(int) double" voi pyöristää ehkä luvut vähän liian 'ankarasti' paikkoin)
 
 Ps. Tietosto ei gitissä näytä hyvältä suoraan.
 Kannattaa katsoa Rawina, jotta näkyy oikein.
