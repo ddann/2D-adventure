@@ -20,6 +20,4 @@ public abstract class Character extends GObject{
 		super(x, y, radius);
 	}
 	
-	
-	
 }

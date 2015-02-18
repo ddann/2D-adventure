@@ -10,4 +10,17 @@ public abstract class GObject {
 		this.radius = radius;
 	}
 	
+	
+	public int getX() {
+		return x;
+	}
+
+	public int getY() {
+		return y;
+	}
+
+	public int getRadius() {
+		return radius;
+	}
+	
 }

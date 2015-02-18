@@ -7,6 +7,7 @@ package adventure2D.project;
 public class App {
 	
 	public static void main( String[] args ) {
+		System.out.println("hei"); //for testing
         Engine engine = new Engine();
         engine.fullGameLoop();
     }

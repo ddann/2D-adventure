@@ -7,6 +7,8 @@ import java.io.PrintWriter;
 import java.util.LinkedList;
 import java.util.Scanner;
 
+import javax.swing.SwingUtilities;
+
 import adventure2D.gui.GUI;
 
 /**
@@ -31,7 +33,7 @@ public class Engine {
 	
 	protected int g = 10; //It is actually the acceleration down (there is no  air resistance...)
 	
-	protected double timeStep = 1/60;
+	protected double timeStep = 1.0/60.0;
 	
 	//TODO: Some way of storing inputs. (for now isn't needed)
 	
@@ -42,7 +44,7 @@ public class Engine {
 	public Engine() {
 		this.loadSave();
 		inputManager = new InputManager(player);
-		gui = new GUI(characterList, objectList, stage);
+		gui = new GUI(characterList, objectList, stage, inputManager);
 	}
 	
 	
@@ -110,10 +112,12 @@ public class Engine {
 	 */
 	public void fullGameLoop() {
 		
+		SwingUtilities.invokeLater(gui);
+		
 		while (!hasLost && !hasWon) {
 			long timeAtStartingLoop = System.nanoTime();
 			this.doOneLoop();
-			//TODO: call the GUI class to draw the game's state.
+			gui.drawFrame();
 			
 			while( System.nanoTime()-timeAtStartingLoop <= 16666666 );
 			//Best way to wait the extra-time (eg. Thread.sleep() Inaccurate), works with any display's refresh-rate.
@@ -133,7 +137,7 @@ public class Engine {
 	 * And two one-liner checks if the player has lost or win.
 	 */
 	protected void doOneLoop() {
-		//TODO:Change things based on inputs and boss' "AI".
+		//TODO:Change things based on boss "AI". There is no AI at the moment thought.
 		this.attack();
 		this.checkAttacksCollision();
 		this.movePlayer();
@@ -158,7 +162,7 @@ public class Engine {
 			player.timeSinceNextShoot =5; //5* 1/60s is the minimum time between shoots.
 			player.shoot = false;
 		}
-	    player.timeSinceNextShoot-=1;
+		else player.timeSinceNextShoot-=1;
 	    
 	    //TODO Boss shooting...I have no idea how to do it by 'AI'.
 	}
@@ -276,8 +280,8 @@ public class Engine {
 	 */
 	protected void moveObjects() {
 		for (GameObject object: objectList) {
-			object.x+= object.speedx * timeStep;
-			object.y+= object.speedy * timeStep;
+			object.x+= 10 * object.speedx * timeStep;
+			object.y+= 10 * object.speedy * timeStep;
 		}
 	}
 	

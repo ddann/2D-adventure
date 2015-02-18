@@ -16,10 +16,18 @@ public class  Stage {
 	int playerPositionX = 222;
 	int playerPositionY = 222;
 	
-	int bossPositionX = 777;
-	int bosspositionY = 777;
-	int bossradius = 300;
+	int bossPositionX = 677; //777
+	int bosspositionY =677; //777
+	int bossradius = 30; //300
 	int bossHealth = 1000;
 	
 	
+	
+	public int getWidth() {
+		return width;
+	}
+	
+	public int getHeight() {
+		return height;
+	}
 }
