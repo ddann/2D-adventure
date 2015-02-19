@@ -10,7 +10,7 @@ import static org.junit.Assert.*;
  */
 public class EngineTest {
 
-	Engine engine;
+	private Engine engine;
 	
 	@Before
     public void setUp() {
@@ -433,10 +433,14 @@ public class EngineTest {
 	
 	@Test
 	public void doOneLoopTest_MoveByPhisics() {
-		engine.player.y = engine.stage.height-1;
+		engine.player.y = engine.stage.height - engine.player.radius-1;
 		engine.player.hasJumped = true;
+		engine.player.accelerationx =1;
 		engine.doOneLoop();
 		assertEquals(engine.player.hasJumped, false);
+		assertEquals(0.8, engine.player.accelerationx, 0.0001);
+		assertEquals(0.8*engine.timeStep, engine.player.speedx, 0.0001); //The method movePlayer affects the testing of this.
+		
 	}
 	
 	@Test

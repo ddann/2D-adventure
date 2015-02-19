@@ -226,7 +226,7 @@ public class Engine {
 			if (player.accelerationx <200) player.accelerationx =  player.accelerationx + (200 - player.accelerationx)*timeStep;
 		}
 		else {
-			player.accelerationx *=  0.8;//If player is not pressing left or right, character stops moving left or right. In that case drop x-speed.
+			player.accelerationx *=  0.8;//If player is not pressing left or right, character stops moving left or right. In that case drop x-acceleration.
 			//TODO if the speed is low enough stop character (and acceleration), done but check values. Not in use for now.
 			//if (player.speedx < 3*timeStep) {
 			//	player.speedx=0;
