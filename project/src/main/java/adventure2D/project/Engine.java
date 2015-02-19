@@ -174,9 +174,9 @@ public class Engine {
 		if (player.shoot && player.timeSinceNextShoot <1) {
 			this.objectList.add(new GameObject(player.x, player.y, 50, 10,0,0)); //TODO check values by play-testing.
 			player.timeSinceNextShoot =5; //5* 1/60s is the minimum time between shoots.
-			player.shoot = false;
 		}
 		else player.timeSinceNextShoot-=1;
+		player.shoot = false;
 	    
 	    //TODO Boss shooting...I have no idea how to do it by 'AI'.
 	}

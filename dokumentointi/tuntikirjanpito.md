@@ -36,6 +36,7 @@
 19.2.2015	00:40-00:50	0,1h	Readmen ja aiheen kuvaus ja rakenne - tekstitiedostojen päivitys.
 19.2.2015	20:40-20:50	0,1h	Luokkakaavion päivittäminen. (On näemmäs vähän sekavan näköinen...pitänee tehdä joskus myöhemmin uudelleen 'puhtaaksi'.)
 19.2.2015	21:20-21:45	0,4h	Vanhojen sekvenssikaavioiden korjaaminen + paranteleminen. Eihän protected muuttujan lukeminen "palauta mitään", sisäisiä kutsuja lisätty ja tietenkin nyt itse metodikutsut lisätty.
+19.2.2015	22:40-23:05	0,4h	Kaksi uutta sekvenssikaaviota. Enempää käyttötapauksia ei enää pelissä oikeasti ole. (+ pieni muutos attack metodissa)
 
 Ps. Tietosto ei gitissä näytä hyvältä suoraan.
 Kannattaa katsoa Rawina, jotta näkyy oikein.
