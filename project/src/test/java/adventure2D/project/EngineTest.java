@@ -81,7 +81,7 @@ public class EngineTest {
 		engine.characterList.add(c);
 		c.x-= 20;
 		engine.overStageTest();
-		assertEquals(c.x, 0);
+		assertEquals(c.radius, c.x);
 	}
 	@Test
 	public void overStageTest2() {
@@ -97,7 +97,7 @@ public class EngineTest {
 		engine.characterList.add(c);
 		c.y-= 33;
 		engine.overStageTest();
-		assertEquals(c.y, 0);
+		assertEquals(c.radius, c.y);
 	}
 	@Test
 	public void overStageTest4() {
@@ -111,11 +111,11 @@ public class EngineTest {
 	public void overStageTest5() {
 		Character c = new Player(0,0);
 		engine.characterList.add(c);
-		c.x+= 10;
-		c.y+= 20;
+		c.x+= c.radius+10;
+		c.y+= c.radius+20;
 		engine.overStageTest();
-		assertEquals(c.x, 10);
-		assertEquals(c.y, 20);
+		assertEquals(c.x, c.radius+10);
+		assertEquals(c.y, c.radius+20);
 	}
 	@Test
 	public void overStageTest6() {
@@ -138,28 +138,28 @@ public class EngineTest {
 		Character c = new Player(0,0);
 		engine.characterList.add(c);
 		engine.overStageTest();
-		assertEquals(c.x, 0);
-		assertEquals(c.y, 0);
+		assertEquals(c.x, c.radius);
+		assertEquals(c.y, c.radius);
 	}
 	@Test
 	public void overStageTest9() {
 		Character c = new Player(0,0);
 		engine.characterList.add(c);
-		c.x-= 1;
-		c.y-= 1;
+		c.x-= c.radius-1;
+		c.y-= c.radius-1;
 		engine.overStageTest();
-		assertEquals(c.x, 0);
-		assertEquals(c.y, 0);
+		assertEquals(c.x, c.radius);
+		assertEquals(c.y, c.radius);
 	}
 	@Test
 	public void overStageTest10() {
 		Character c = new Player(0,0);
 		engine.characterList.add(c);
-		c.x+= 1;
-		c.y+= 1;
+		c.x+= c.radius+1;
+		c.y+= c.radius+1;
 		engine.overStageTest();
-		assertEquals(c.x, 1);
-		assertEquals(c.y, 1);
+		assertEquals(c.x, c.radius+1);
+		assertEquals(c.y, c.radius+1);
 	}
 	@Test
 	public void overStageTest11() {
@@ -447,7 +447,7 @@ public class EngineTest {
 	public void doOneLoopTest_OverStageTest() {
 		engine.player.y = -1;
 		engine.doOneLoop();
-		assertEquals(engine.player.y, 0);
+		assertEquals(engine.player.y, engine.player.radius);
 	}
 	
 	@Test
