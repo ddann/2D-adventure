@@ -83,12 +83,12 @@ public class GUI extends JPanel implements Runnable{
 		
 		g.setColor(Color.BLACK);
 		for (Character c: this.characterList) {
-			g.fillOval(c.getX(), c.getY(), c.getRadius(), c.getRadius());
+			g.fillOval((int) (c.getX() - c.getRadius()), (int) (c.getY() - c.getRadius()), 2*c.getRadius(), 2*c.getRadius());
 		}
 		
 		g.setColor(Color.WHITE);
 		for (GameObject go: this.objectList) {
-			g.fillOval(go.getX(), go.getY(), go.getRadius(), go.getRadius());
+			g.fillOval((int) (go.getX() - go.getRadius()), (int) (go.getY() - go.getRadius()), 2*go.getRadius(), 2*go.getRadius());
 		}
 	}
 

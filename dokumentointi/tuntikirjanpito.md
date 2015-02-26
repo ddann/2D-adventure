@@ -38,6 +38,8 @@
 19.2.2015	21:20-21:45	0,4h	Vanhojen sekvenssikaavioiden korjaaminen + paranteleminen. Eihän protected muuttujan lukeminen "palauta mitään", sisäisiä kutsuja lisätty ja tietenkin nyt itse metodikutsut lisätty.
 19.2.2015	22:40-23:05	0,4h	Kaksi uutta sekvenssikaaviota. Enempää käyttötapauksia ei enää pelissä oikeasti ole. (+ pieni muutos attack metodissa)
 19-20.2.2015	23:30-00:00	0,5h	Testejä.
+20.2.2015	20:00-21:00	1h	Testipelailua, vakioiden säätelyä ja korjailua.
+26.2.2015	02:15-02:30	0,25h	Pientä säätelyä demoamista varten. (pitkälti vakioiden arvoja)
 
 Ps. Tietosto ei gitissä näytä hyvältä suoraan.
 Kannattaa katsoa Rawina, jotta näkyy oikein.

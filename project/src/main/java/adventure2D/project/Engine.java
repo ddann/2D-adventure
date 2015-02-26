@@ -116,17 +116,6 @@ public class Engine {
 		SwingUtilities.invokeLater(gui);
 		
 		while (!hasLost && !hasWon) {
-			//System.out.println(player.x);
-			//System.out.println(player.y);
-			//System.out.println(player.toLeft);
-			//System.out.println(player.toRight);
-			//System.out.println(player.speedx);
-			//System.out.println(player.speedy);
-			//System.out.println("---");
-			//System.out.println(player.accelerationx);
-			//System.out.println(player.accelerationy);
-			//System.out.println("___");
-			
 			long timeAtStartingLoop = System.nanoTime();
 			this.doOneLoop();
 			gui.drawFrame();
@@ -172,8 +161,8 @@ public class Engine {
 	 */
 	protected void attack() {
 		if (player.shoot && player.timeSinceNextShoot <1) {
-			this.objectList.add(new GameObject(player.x, player.y, 50, 10,0,0)); //TODO check values by play-testing.
-			player.timeSinceNextShoot =5; //5* 1/60s is the minimum time between shoots.
+			this.objectList.add(new GameObject(player.x, player.y, 30, 10,0,0)); //TODO check values by play-testing.
+			player.timeSinceNextShoot =5; //5 * 1/60 s is the minimum time between shoots.
 		}
 		else player.timeSinceNextShoot-=1;
 		player.shoot = false;
@@ -183,7 +172,7 @@ public class Engine {
 	
 	/**
 	 * This method checks if any 'hostile'(attack-object of "opposite side") object has touch a character and damages it based on which character/attack has happened.
-	 * Note: for now player dies, if object created by boss and respectively boss' looses a static value of health.
+	 * Note: For now player dies, if an object created by the boss and respectively boss' looses a static value of health.
 	 */
 	protected void checkAttacksCollision() {
 		LinkedList<GameObject> removeList = new LinkedList<GameObject>();
@@ -206,7 +195,8 @@ public class Engine {
 	 * A protected method that makes moves/"does things based in players inputs" that are only possible to do by the playable character.
 	 */
 	protected void movePlayer() {
-		//TODO CHECK THE VALUES OF THE METHOD!
+		//The below has some random values, they may be changed if desired.
+		
 		if (player.y != stage.height - player.radius -1) {
 			player.accelerationy += 30*g * timeStep; //Just drops faster and faster... TODO Maybe falling speed should be limited. 
 		}
@@ -227,12 +217,12 @@ public class Engine {
 		}
 		else {
 			player.accelerationx *=  0.8;//If player is not pressing left or right, character stops moving left or right. In that case drop x-acceleration.
-			//TODO if the speed is low enough stop character (and acceleration), done but check values. Not in use for now.
+			//If the speed is low enough stop character (and acceleration), done but check values. Not in use for now as it stops for rounding integer to zero (good enough).
 			//if (player.speedx < 3*timeStep) {
 			//	player.speedx=0;
 			//	player.accelerationx=0;
 			//}
-			//TODO the below it's most probably senseless and useless/bad.
+			//The below it's most probably senseless and useless/bad. But if desired to prevent for some reason minimal y-axis movement they are left here commented.
 			//if (player.speedy < 3*timeStep) {
 			//	player.speedy=0;
 			//	player.accelerationy=0;
@@ -267,7 +257,7 @@ public class Engine {
 				if (c.accelerationy > 0) c.accelerationy =0;
 				if (c.speedy > 0) c.speedy =0;
 			}
-			if (c.y <= 0) {
+			if (c.y <= c.radius) {
 				if (c.accelerationy < 0) c.accelerationy =0;
 				if (c.speedy < 0) c.speedy =0;
 			}
@@ -275,7 +265,7 @@ public class Engine {
 				if (c.accelerationx > 0) c.accelerationx =0;
 				if (c.speedx > 0) c.speedx =0;
 			}
-			if (c.x <= 0) {
+			if (c.x <= c.radius) {
 				if (c.accelerationx < 0) c.accelerationx =0;
 				if (c.speedx < 0) c.speedx =0;
 			}
@@ -288,13 +278,13 @@ public class Engine {
 	 * (For now it only get the character back to the stage)
 	 */
 	protected void overStageTest() {
-		//(maybe)TODO: In case of the player going over stage it could be a loose.
+		//(maybe)TODO: In case of the player going over stage it could be a loose. For now omitted.
 		//The boss should't go over the stage, but in case it happens... (would it be actually a bug?)
 		for (Character c: characterList) {
 			if (c.x >= stage.width - c.radius) c.x = stage.width - c.radius  -1;
-			else if (c.x < 0) c.x = 0;
+			else if (c.x < c.radius) c.x = c.radius;
 			if (c.y >= stage.height - c.radius) c.y = stage.height - c.radius  -1;
-			else if (c.y < 0) c.y = 0;
+			else if (c.y < c.radius) c.y = c.radius;
 		}
 	}
 	
