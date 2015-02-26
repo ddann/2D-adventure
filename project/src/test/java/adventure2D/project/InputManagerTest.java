@@ -1,6 +1,7 @@
 package adventure2D.project;
 
 import static org.junit.Assert.*;
+
 import java.awt.event.KeyEvent;
 
 import org.junit.Before;

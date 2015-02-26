@@ -20,13 +20,13 @@ public class InputManager implements KeyListener{
 	@Override
 	public void keyPressed(KeyEvent e) {
 		int key = e.getKeyCode();
-		if (key == KeyEvent.VK_S) {
+		if (key == KeyEvent.VK_D) {
 			player.hasJumped = true;
 		}
-		if (key== KeyEvent.VK_RIGHT)  {
+		if (key == KeyEvent.VK_RIGHT)  {
 			player.toRight = true;
 		}
-		if (key== KeyEvent.VK_LEFT)  {
+		if (key == KeyEvent.VK_LEFT)  {
 			player.toLeft = true;
 		}
 		if (key == KeyEvent.VK_A) {
@@ -37,10 +37,10 @@ public class InputManager implements KeyListener{
 	@Override
 	public void keyReleased(KeyEvent e) {
 		int key = e.getKeyCode();
-		if (key== KeyEvent.VK_RIGHT)  {
+		if (key == KeyEvent.VK_RIGHT)  {
 			player.toRight = false;
 		}
-		if (key== KeyEvent.VK_LEFT)  {
+		if (key == KeyEvent.VK_LEFT)  {
 			player.toLeft = false;
 		}
 	}

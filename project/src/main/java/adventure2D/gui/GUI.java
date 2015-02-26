@@ -1,6 +1,7 @@
 package adventure2D.gui;
 
 import java.util.List;
+
 import java.awt.*;
 
 import javax.swing.*;
@@ -53,14 +54,30 @@ public class GUI extends JPanel implements Runnable{
 	 * Makes a graphical representation to show the player that (s)he has win.
 	 */
 	public void victoryScreen() {
-		//TODO something that would tell the player about the victory.
+		frame.getContentPane().setLayout(new GridLayout(2,1));
+		frame.remove(this);
+		JButton infoMessage = new JButton("Congratulations for the victory on this extremely hard game!");
+		frame.add(infoMessage);
+		JButton button = new JButton("Play again this 'marvelous' game. \n Press alt + F4 for doing it correctly...then run the program again.");
+		frame.add(button);
+		
+		frame.pack();
+		frame.setVisible(true);
 	}
 	
 	/**
 	 * Makes a graphical representation to show the player that (s)he has lost.
 	 */
 	public void looseScreen() {
-		//TODO something that would tell the player about the loosing.
+		frame.getContentPane().setLayout(new GridLayout(2,1));
+		frame.remove(this);
+		JButton infoMessage = new JButton("You are...well...just a...LOOSER!");
+		frame.add(infoMessage);
+		JButton button = new JButton("Play again this 'marvelous' game... Or are you a chicken? (Guess you are it anyway.) \n Press alt + F4 for doing it correctly...then run the program again.");
+		frame.add(button);
+		
+		frame.pack();
+		frame.setVisible(true);
 	}
 	
 
