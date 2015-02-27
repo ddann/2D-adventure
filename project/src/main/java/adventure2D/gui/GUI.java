@@ -58,7 +58,8 @@ public class GUI extends JPanel implements Runnable{
 		frame.remove(this);
 		JButton infoMessage = new JButton("Congratulations for the victory on this extremely hard game!");
 		frame.add(infoMessage);
-		JButton button = new JButton("Play again this 'marvelous' game. \n Press alt + F4 for doing it correctly...then run the program again.");
+		JButton button = new JButton("Play again this 'marvelous' game."
+				+ "\n Press alt + F4 for doing it correctly...then run the program again.");
 		frame.add(button);
 		
 		frame.pack();
@@ -73,8 +74,25 @@ public class GUI extends JPanel implements Runnable{
 		frame.remove(this);
 		JButton infoMessage = new JButton("You are...well...just a...LOOSER!");
 		frame.add(infoMessage);
-		JButton button = new JButton("Play again this 'marvelous' game... Or are you a chicken? (Guess you are it anyway.) \n Press alt + F4 for doing it correctly...then run the program again.");
+		JButton button = new JButton("Play again this 'marvelous' game... Or are you a chicken? (Guess you are it anyway.)"
+				+ "\n Press alt + F4 for doing it correctly...then run the program again.");
 		frame.add(button);
+		
+		frame.pack();
+		frame.setVisible(true);
+	}
+	
+	
+	/**
+	 * It gives a message to the player that the game has encountered a error.
+	 * NOTE: For now it is not in use, but it is made for 'expandability'.
+	 * @param message a string containing the reason for the error and/or what it actually caused.
+	 */
+	public void problemDetected(String message) {
+		frame.remove(this);
+		JButton problemMessage = new JButton("This program has encountered an error: " + message
+				+ "\n (And no starting the game again before doing something to this, OK?)");
+		frame.add(problemMessage);
 		
 		frame.pack();
 		frame.setVisible(true);

@@ -25,20 +25,42 @@ public class Engine {
 	
 	protected Stage stage; //There is only one for now.
 	protected Player player;
-	protected Boss boss;
+	protected Boss boss; //There is only one for now.
 	
+	/**
+	 * A list containing the Characters of this game's instance.
+	 */
 	protected LinkedList<Character> characterList = new LinkedList<Character>();
 	
+	/**
+	 * A list containing the GameObjects of this game's instance.
+	 */
 	protected LinkedList<GameObject> objectList = new LinkedList<GameObject>();
 	
-	protected int g = 10; //It would be the game's value to gravity, but the value isn't use anymore/for now (directly).
 	
+	/**
+	 * It would be the game's value for gravity, but the value isn't in use anymore/for now (directly).
+	 */
+	protected int g = 10;
+	
+	/**
+	 * The game's 'time-step' in other words the time between frames/each iteration of a game loop.
+	 */
 	protected double timeStep = 1.0/60.0;
 	
-	//TODO: Some way of storing inputs. (for now isn't needed)
 	
+	/**
+	 * Whether the player has lost or not. If has collided with boss or has been hit by a boss' shoot (unimplemented) the player has lost.
+	 */
 	protected boolean hasLost = false;
+	/**
+	 * Whether the player has won or not. If the boss is defeated the player has won.
+	 */
 	protected boolean hasWon = false;
+	
+	
+	//TODO: (May be needed for 'expanding' the program) Some way of storing inputs. (for now isn't needed)
+	
 	
 	
 	public Engine() {
@@ -51,6 +73,7 @@ public class Engine {
 	
 	/**
 	 * This method loads the save by 'loading' the save's info to the corresponding variables (or to ram if to be said).
+	 * If there is no "save.save" file it is created.
 	 */
 	protected void loadSave() {
 		if (!save.exists()) {
@@ -59,18 +82,13 @@ public class Engine {
 				PrintWriter writer = new PrintWriter(save);
 				writer.println("1");
 				writer.close();
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+				} catch (IOException e) {}
 		}
 		
 		Scanner scanner = null;
 		try {
 			scanner= new Scanner(save);
-		} catch (Exception e) {
-			//TODO something
-        }
+		} catch (Exception e) {}
 		
 		String level = scanner.nextLine();
 		if (level == level) { //For now it always starts the same stage.
@@ -81,16 +99,14 @@ public class Engine {
 			characterList.add(boss);
 		}
 		else {
-			//TODO tell the game has been completed. If want to play again from the beginning...to delete/move away the save?
-			//TODO And close the program...or something
 			//There is only one stage but if there would be more this would be the way to load the stage where one is.
-			//For this project most likely it will always start the first stage (I won't change it, and as for "expandibility" I'll let this like it is now)
+			//For this project for now it will always start the first stage (I won't change it, and as for "expandibility" I'll let this part like it is now)
 		}
 		scanner.close();
 	}
 	
 	/**
-	 * A method in charge of saving to as save-file.
+	 * A method in charge of 'saving' to as save-file.
 	 * For now it is only called if the game is won, and writes just "won" to the save.
 	 */
 	protected void saveSave() {
@@ -98,17 +114,14 @@ public class Engine {
 			PrintWriter writer = new PrintWriter(save);
 			writer.println("won");
 			writer.close();
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		} catch (FileNotFoundException e) {}
 	}
 
 	
 	
 	/**
 	 * The class' "main method" that is the method that calls the method that makes the game run, call the GUI to draw and wait the needed time for steady FPS.
-	 * It starts the game loop, then at ending the game it may "save".
+	 * It starts the game loop, then at ending the game it calls the method responsible of the game's session's ending. It may 'save' the game.
 	 * Physics simulation is done with Euler integration and collision detections between objects with spherical collision detection.
 	 */
 	public void fullGameLoop() {
@@ -117,20 +130,17 @@ public class Engine {
 		
 		while (!hasLost && !hasWon) {
 			long timeAtStartingLoop = System.nanoTime();
+			
 			this.doOneLoop();
 			gui.drawFrame();
 			
-			while( System.nanoTime()-timeAtStartingLoop <= 16666666 );
 			//Best way to wait the extra-time (eg. Thread.sleep() Inaccurate), works with any display's refresh-rate.
 			//But keeps one thread completely busy, bad if using battery or if single-core(they are only old notebooks however);
 			//There were other ways, but only for C++.
+			while( System.nanoTime()-timeAtStartingLoop <= 16666666 );
 		}
-		//Only saves for now if won (there is only one stage...)
-		if (this.hasWon) {
-			this.saveSave();
-			gui.victoryScreen();
-		}
-		else gui.looseScreen();
+		
+		this.gameEnd();
 	}
 	
 	
@@ -140,7 +150,7 @@ public class Engine {
 	 * And two one-liner checks if the player has lost or win.
 	 */
 	protected void doOneLoop() {
-		//TODO:Change things based on boss "AI". There is no AI at the moment thought.
+		//TODO:Change things based on boss "AI". There is no AI at the moment thought. For now it will be left unimplemented (this is part of 'expandability')
 		this.attack();
 		this.checkAttacksCollision();
 		this.movePlayer();
@@ -153,26 +163,39 @@ public class Engine {
 	}
 	
 	
+	/**
+	 * This method is in charge of notifying the player that the game has ended.
+	 * It also calls save() if needed.
+	 * @see this.save()
+	 */
+	protected void gameEnd() {
+		//Only saves for now if won (there is only one stage...)
+		if (this.hasWon) {
+			this.saveSave();
+			gui.victoryScreen();
+		}
+		else gui.looseScreen();
+	}
 
 
+	
 	/**
 	 * This method is in charge of crating the attacks' objects and making damage to the boss based on hits.
-	 * It also check if the boss' health is 0 or less, and respectively saves the winning to the variable.
 	 */
 	protected void attack() {
 		if (player.shoot && player.timeSinceNextShoot <1) {
-			this.objectList.add(new GameObject(player.x, player.y, 30, 10,0,0)); //TODO check values by play-testing.
+			this.objectList.add(new GameObject(player.x, player.y, 30, 10,0,0)); //At this speed toInt-rounding has a great effect.
 			player.timeSinceNextShoot =5; //5 * 1/60 s is the minimum time between shoots.
 		}
 		else player.timeSinceNextShoot-=1;
 		player.shoot = false;
 	    
-	    //TODO Boss shooting...I have no idea how to do it by 'AI'.
+	    //TODO Boss shooting...I have no idea how to do it by 'AI'. Unimplemented for now, to be part of 'expanding the game'.
 	}
 	
 	/**
 	 * This method checks if any 'hostile'(attack-object of "opposite side") object has touch a character and damages it based on which character/attack has happened.
-	 * Note: For now player dies, if an object created by the boss and respectively boss' looses a static value of health.
+	 * The player dies, if an object created by the boss and respectively boss' looses a static value of health.
 	 */
 	protected void checkAttacksCollision() {
 		LinkedList<GameObject> removeList = new LinkedList<GameObject>();
@@ -192,10 +215,12 @@ public class Engine {
 	}
 	
 	/**
-	 * A protected method that makes moves/"does things based in players inputs" that are only possible to do by the playable character.
+	 * A method that makes moves/"does things based in players inputs" that are only possible to do by the playable character.
+	 * This method may "make the playable character to jump" and to change x movement based on Player.toLeft and Player.toRight.
+	 * @see Player
 	 */
 	protected void movePlayer() {
-		//The below has some random values, they may be changed if desired.
+		//All the below has just some random values, they may be changed if desired.
 		
 		if (player.y != stage.height - player.radius -1) {
 			player.accelerationy += 30*g * timeStep; //Just drops faster and faster... TODO Maybe falling speed should be limited. 
@@ -217,7 +242,9 @@ public class Engine {
 		}
 		else {
 			player.accelerationx *=  0.8;//If player is not pressing left or right, character stops moving left or right. In that case drop x-acceleration.
-			//If the speed is low enough stop character (and acceleration), done but check values. Not in use for now as it stops for rounding integer to zero (good enough).
+			
+			//If the speed is low enough then stop character (and acceleration), done but check values.
+			//Not in use for now as it stops already for rounding integer to zero (good enough).
 			//if (player.speedx < 3*timeStep) {
 			//	player.speedx=0;
 			//	player.accelerationx=0;
@@ -233,13 +260,10 @@ public class Engine {
 	
 	/**
 	 * Moves all the characters based in physics laws. (some "hard-coded" calculations.)
-	 * This is done with Euler integration. (acceleration calculation is omitted here)
+	 * This is done with Euler integration. (Acceleration calculation is omitted here as they are done in other methods)
 	 */
 	protected void moveByPhisics() {
-		//TODO:Something based on the boss AI.
-		
 		for (Character c: characterList) {		
-			//All the above changes the acceleration based on forces. (I think is better to update acceleration first)
 			c.x+= c.speedx * timeStep; c.y+= c.speedy * timeStep;
 			c.speedx+= c.accelerationx * timeStep; c.speedy+= c.accelerationy * timeStep;
 		}
@@ -249,10 +273,13 @@ public class Engine {
 	 * Checks whether there has been a collision with a stages 'wall', actually the edge.
 	 * For now it assumes that stages max y is the floor and other max/min values walls.
 	 * In case of collision it resets to zero both the character's speed and acceleration.
+	 * However acceleration/speed is kept to other directions than the one towards the collision with the wall.
+	 * 
+	 * Note: Characters doesn't bounce. (They loose all kinetic energy at a "collision" with the stage's edge)
+	 * However there may happendd a 'strange bounce' if enought acceleration in the opposite direction of the wall.
 	 */
 	protected void wallCollisionCheck() {
 		for (Character c: characterList) {
-			//Characters doesn't bounce. (They loose all kinetic energy at a "collision" with the stage's edge.)
 			if (c.y >= stage.height - c.radius -1) {
 				if (c.accelerationy > 0) c.accelerationy =0;
 				if (c.speedy > 0) c.speedy =0;
@@ -278,7 +305,7 @@ public class Engine {
 	 * (For now it only get the character back to the stage)
 	 */
 	protected void overStageTest() {
-		//(maybe)TODO: In case of the player going over stage it could be a loose. For now omitted.
+		//TODO: (maybe) In case of the player going over stage it could be a loose. For now omitted.
 		//The boss should't go over the stage, but in case it happens... (would it be actually a bug?)
 		for (Character c: characterList) {
 			if (c.x >= stage.width - c.radius) c.x = stage.width - c.radius  -1;

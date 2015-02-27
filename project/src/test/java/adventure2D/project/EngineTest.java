@@ -145,8 +145,8 @@ public class EngineTest {
 	public void overStageTest9() {
 		Character c = new Player(0,0);
 		engine.characterList.add(c);
-		c.x-= c.radius-1;
-		c.y-= c.radius-1;
+		c.x+= c.radius-1;
+		c.y+= c.radius-1;
 		engine.overStageTest();
 		assertEquals(c.x, c.radius);
 		assertEquals(c.y, c.radius);

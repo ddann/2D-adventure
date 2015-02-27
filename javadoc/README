@@ -1,3 +1,8 @@
  
-Javadocci on tehty myös kaikille protected metodeille, koska muuten paljon metodien dokumentoimista ei olisi, koska lähes jokainen on protected. (sekä nyt teki mieli oikeastaan osittain...)
+Javadocci on tehty myös muillekin kun private metodeille (sekä osalle atribuutteja), koska muuten paljon metodien dokumentoimista ei olisi, koska lähes jokainen on protected. (sekä nyt teki mieli oikeastaan osittain...)
 (tiedän ettei ole tapana, mutta voi näinkin tehdä)
+
+Ja lähes kaikille paitsi private-näkyvyysmäärelle olevalle on siis tehty javadoc. (Mukaan lukien package private)
+Siis jos oli täysin triviaali (ja ei public), yksinkertaisin getteri/setteri tai @override niin en tehnyt javadoccia.
+
+Pieni huomio: JOstain syystä javadocissa ei ole rivinvaihtoja, joten vähän ikävän näköistä nuo kuvaukset.

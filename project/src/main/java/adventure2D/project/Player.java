@@ -9,11 +9,20 @@ package adventure2D.project;
 public class Player extends Character{
 	
 	/**
-	 * Whether there is a jump to be done.
+	 * Whether there has been given a command to jump that hasn't been already deal with.
 	 */
 	boolean hasJumped = false;
+	/**
+	 * Tells if there is to be add acceleration to the left/"desired by player to move left" (player pressing left)
+	 */
 	boolean toLeft = false;
+	/**
+	 * Tells if there is to be add acceleration to the right/"desired by player to move right" (player pressing right)
+	 */
 	boolean toRight = false;
+	/**
+	 * If there has been given a command to shoot that hasn't been already deal with.
+	 */
 	boolean shoot = false;
 	
 	

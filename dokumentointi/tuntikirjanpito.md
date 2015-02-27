@@ -42,6 +42,8 @@
 26.2.2015	02:15-02:30	0,25h	Pientä säätelyä demoamista varten. (pitkälti vakioiden arvoja)
 26.2.2015	03:00-04:30	1,5h	Pitkälti epäonnistunut yritys saada jonkinlaisen "try againningin" toimimaan (ainakin nyt lopetus on selvempi) (+ ampuminen S -> D, mukavampi)
 26.2.2015	22:35-22:50	0,25h	Testien korjailua. (Nyt toimivat mielivaltasislla vakioilla lähes poikkeuksetta...) (+väliaikainen? pit-raportti)
+27.2.2015	01:00-01:30	0,5h	Refraktorointia ja javadoccia.
+27.2.2015	01:30-02:00	0,5h	Javadocin 'viilaamista' paremaksi.
 
 
 Ps. Tietosto ei gitissä näytä hyvältä suoraan.
