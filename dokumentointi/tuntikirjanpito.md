@@ -46,6 +46,7 @@
 27.2.2015	01:30-02:00	0,5h	Javadocin 'viilaamista' paremaksi.
 27.2.2015	02:00-02:45	0,75h	Javadocin parantelemista, kuvauksen ja readmen päivittäminen ja kaikkien protected atribuuttien näkyvyys tiukemmaksi. (siis protected -> package private)
 27.2.2015	02:45-04:15	1,5h	Luokkakaavion piirtäminen puhtaaksi sekä rakenekuvauksen tekeminen.
+27.2.2015	04:15-05:00	0,75h	Käyttöojeet. Meni vähän yli ja vitsiksi. (varmaan kellonaika vaikutti)
 
 
 Ps. Tietosto ei gitissä näytä hyvältä suoraan.
