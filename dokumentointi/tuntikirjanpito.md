@@ -44,6 +44,7 @@
 26.2.2015	22:35-22:50	0,25h	Testien korjailua. (Nyt toimivat mielivaltasislla vakioilla lähes poikkeuksetta...) (+väliaikainen? pit-raportti)
 27.2.2015	01:00-01:30	0,5h	Refraktorointia ja javadoccia.
 27.2.2015	01:30-02:00	0,5h	Javadocin 'viilaamista' paremaksi.
+27.2.2015	02:00-02:45	0,75h	Javadocin parantelemista, kuvauksen ja readmen päivittäminen ja kaikkien protected atribuuttien näkyvyys tiukemmaksi. (siis protected -> package private)
 
 
 Ps. Tietosto ei gitissä näytä hyvältä suoraan.

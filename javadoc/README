@@ -3,6 +3,6 @@ Javadocci on tehty myös muillekin kun private metodeille (sekä osalle atribuut
 (tiedän ettei ole tapana, mutta voi näinkin tehdä)
 
 Ja lähes kaikille paitsi private-näkyvyysmäärelle olevalle on siis tehty javadoc. (Mukaan lukien package private)
-Siis jos oli täysin triviaali (ja ei public), yksinkertaisin getteri/setteri tai @override niin en tehnyt javadoccia.
+Siis jos oli täysin triviaali (ja @override/ei public) tai yksinkertaisin getteri/setteri niin en tehnyt javadoccia.
 
 Pieni huomio: JOstain syystä javadocissa ei ole rivinvaihtoja, joten vähän ikävän näköistä nuo kuvaukset.

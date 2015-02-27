@@ -11,7 +11,7 @@ import java.awt.event.KeyListener;
  */
 public class InputManager implements KeyListener{
 	
-	protected Player player;
+	Player player;
 
 	public InputManager(Player player) {
 		this.player = player;

@@ -18,45 +18,45 @@ import adventure2D.gui.GUI;
  */
 public class Engine {
 	
-	protected InputManager inputManager;
-	protected GUI gui;
+	InputManager inputManager;
+	GUI gui;
 
 	private File save = new File("save.save"); //Just a normal text file in the program's root folder, it's the game's save (nothing sencefull to save for now).
 	
-	protected Stage stage; //There is only one for now.
-	protected Player player;
-	protected Boss boss; //There is only one for now.
+	Stage stage; //There is only one for now.
+	Player player;
+	Boss boss; //There is only one for now.
 	
 	/**
 	 * A list containing the Characters of this game's instance.
 	 */
-	protected LinkedList<Character> characterList = new LinkedList<Character>();
+	LinkedList<Character> characterList = new LinkedList<Character>();
 	
 	/**
 	 * A list containing the GameObjects of this game's instance.
 	 */
-	protected LinkedList<GameObject> objectList = new LinkedList<GameObject>();
+	LinkedList<GameObject> objectList = new LinkedList<GameObject>();
 	
 	
 	/**
 	 * It would be the game's value for gravity, but the value isn't in use anymore/for now (directly).
 	 */
-	protected int g = 10;
+	int g = 10;
 	
 	/**
 	 * The game's 'time-step' in other words the time between frames/each iteration of a game loop.
 	 */
-	protected double timeStep = 1.0/60.0;
+	double timeStep = 1.0/60.0;
 	
 	
 	/**
 	 * Whether the player has lost or not. If has collided with boss or has been hit by a boss' shoot (unimplemented) the player has lost.
 	 */
-	protected boolean hasLost = false;
+	boolean hasLost = false;
 	/**
 	 * Whether the player has won or not. If the boss is defeated the player has won.
 	 */
-	protected boolean hasWon = false;
+	boolean hasWon = false;
 	
 	
 	//TODO: (May be needed for 'expanding' the program) Some way of storing inputs. (for now isn't needed)

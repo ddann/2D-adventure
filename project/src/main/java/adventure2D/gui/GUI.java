@@ -12,8 +12,8 @@ import adventure2D.project.InputManager;
 import adventure2D.project.Stage;
 
 /**
- * The game's GUI in charge of making the GUI, actually: the HUD, drawing the game's world (via using another class), etc.
- * (It is badly done, but I didn't figure a better way to do this.)
+ * The game's GUI in charge of making the GUI, actually: the 'HUD', drawing the game's world (via using another class), etc.
+ * It directly creates a graphical output window which resolution is the same that the size (in Int) of the stage to be drawn (stage's width and height)
  * (If objects would have graphics attached to them, it would be possible, and the best option, to have only one GObject list...now apart for different colors)
  * 
  * @param characterList a list containing the characters in the stage.
@@ -45,6 +45,8 @@ public class GUI extends JPanel implements Runnable{
 	
 	/**
 	 * This method draws a frame of the game, that's said it draws the current situation of the game.
+	 * Better said it actually makes this class override-method paintComponent to update the graphical output.
+	 * @see this.paintComponent
 	 */
 	public void drawFrame() {
 		super.repaint();
@@ -112,6 +114,10 @@ public class GUI extends JPanel implements Runnable{
 		frame.setVisible(true);
 	}
 	
+	/**
+	 * A override method that is the method responsible for updating the graphical output.
+	 * It draws all the game's objects as circles. Characters are drawn black and objects white.
+	 */
 	@Override
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
