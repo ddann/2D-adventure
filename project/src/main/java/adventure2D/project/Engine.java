@@ -58,6 +58,11 @@ public class Engine {
 	 */
 	boolean hasWon = false;
 	
+	/**
+	 * Wether there hasn't been found any problem while runnning or not.
+	 */
+	boolean allFine = true;
+	
 	
 	//TODO: (May be needed for 'expanding' the program) Some way of storing inputs. (for now isn't needed)
 	
@@ -69,6 +74,18 @@ public class Engine {
 		gui = new GUI(characterList, objectList, stage, inputManager);
 	}
 	
+	
+	/**
+	 * This method is in charge of making the GUI to report an error to the player if one has happened.
+	 * It stops the game for running so it doesn't crash.
+	 * @param message a string containing the reason for the error and/or what it actually caused.
+	 */
+	protected void problemEncountered(String message) {
+		this.allFine = false; //After this the game will stop looping
+		//The below creates a GUI just for reporting the problem.
+		gui = new GUI(characterList, objectList, new Stage(), new InputManager(new Player(111,222)));
+		gui.problemDetected(message);
+	}
 	
 	
 	/**
@@ -82,25 +99,34 @@ public class Engine {
 				PrintWriter writer = new PrintWriter(save);
 				writer.println("1");
 				writer.close();
-				} catch (IOException e) {}
+			} catch (IOException e) {
+				this.problemEncountered("Problem while creating the save file. Make sure that you have writing permissions in where this program resides.");
+			}
 		}
 		
 		Scanner scanner = null;
 		try {
 			scanner= new Scanner(save);
-		} catch (Exception e) {}
+		} catch (Exception e) {
+			this.problemEncountered("Unexpected problem: Cannot 'scan' for some reason the save. Check file integrity.");
+		}
 		
-		String level = scanner.nextLine();
-		if (level == level) { //For now it always starts the same stage.
-			this.stage = new Stage();
-			player = new Player(stage.playerPositionX, stage.playerPositionY);
-			boss = new Boss(stage.bossPositionX, stage.bosspositionY, stage.bossradius, stage.bossHealth);
-			characterList.add(player);
-			characterList.add(boss);
+		if (scanner.hasNextLine()) {
+			String level = scanner.nextLine();
+			if (level == level) { //For now it always starts the same stage.
+				this.stage = new Stage();
+				player = new Player(stage.playerPositionX, stage.playerPositionY);
+				boss = new Boss(stage.bossPositionX, stage.bosspositionY, stage.bossradius, stage.bossHealth);
+				characterList.add(player);
+				characterList.add(boss);
+			}
+			else {
+				//There is only one stage but if there would be more this would be the way to load the stage where one is.
+				//For this project for now it will always start the first stage (I won't change it, and as for "expandibility" I'll let this part like it is now)
+			}
 		}
 		else {
-			//There is only one stage but if there would be more this would be the way to load the stage where one is.
-			//For this project for now it will always start the first stage (I won't change it, and as for "expandibility" I'll let this part like it is now)
+			this.problemEncountered("Check for save's integrity. It exists but it is read to be empty.");
 		}
 		scanner.close();
 	}
@@ -125,22 +151,21 @@ public class Engine {
 	 * Physics simulation is done with Euler integration and collision detections between objects with spherical collision detection.
 	 */
 	public void fullGameLoop() {
-		
-		SwingUtilities.invokeLater(gui);
-		
-		while (!hasLost && !hasWon) {
-			long timeAtStartingLoop = System.nanoTime();
-			
-			this.doOneLoop();
-			gui.drawFrame();
-			
-			//Best way to wait the extra-time (eg. Thread.sleep() Inaccurate), works with any display's refresh-rate.
-			//But keeps one thread completely busy, bad if using battery or if single-core(they are only old notebooks however);
-			//There were other ways, but only for C++.
-			while( System.nanoTime()-timeAtStartingLoop <= 16666666 );
+		if (allFine) {
+			SwingUtilities.invokeLater(gui);
+			while (!hasLost && !hasWon) {
+				long timeAtStartingLoop = System.nanoTime();
+
+				this.doOneLoop();
+				gui.drawFrame();
+
+				//Best way to wait the extra-time (eg. Thread.sleep() Inaccurate), works with any display's refresh-rate.
+				//But keeps one thread completely busy, bad if using battery or if single-core(they are only old notebooks however);
+				//There were other ways, but only for C++.
+				while (System.nanoTime() - timeAtStartingLoop <= 16666666);
+			}
+			this.gameEnd();
 		}
-		
-		this.gameEnd();
 	}
 	
 	
